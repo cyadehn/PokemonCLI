@@ -35,7 +35,8 @@ namespace PokeAPIClient
         public static List<string> ReadDialogue(string fileName)
         {
             List<string> dialogue = new List<string>();
-            using ( var reader = new StreamReader(fileName))
+            string fileLocation = string.Format("dialogue/{0}", fileName);
+            using ( var reader = new StreamReader(fileLocation))
             {
                 string line;
                 while ( (line = reader.ReadLine()) != null )
