@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace PokeAPIClient
 {
-    public class PokemonResponse
+    public class PokeResponse
     {
         public int Count { get; set; } 
         public string Next { get; set; } 
