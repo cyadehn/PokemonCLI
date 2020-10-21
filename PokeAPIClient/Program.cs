@@ -4,6 +4,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Collections.Generic;
+using System.Threading;
+using System.IO;
 
 namespace PokeAPIClient
 {
@@ -11,9 +13,10 @@ namespace PokeAPIClient
     {
         private static readonly HttpClient client = new HttpClient();
 
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
-            PlayerCharacter player1 = new PlayerCharacter();
+            var game = new Game();
+            game.NewGame();
         }
 
         private static async Task ProcessPokemon()
@@ -26,6 +29,35 @@ namespace PokeAPIClient
             foreach (var pokemon in response.results)
             {
                 Console.WriteLine(pokemon.name);
+            }
+        }
+
+        public static List<string> ReadDialogue(string fileName)
+        {
+            List<string> dialogue = new List<string>();
+            using ( var reader = new StreamReader(fileName))
+            {
+                string line;
+                while ( (line = reader.ReadLine()) != null )
+                {
+                    dialogue.Add(line);
+                }
+            }
+            return dialogue;
+        }
+
+        public static void PrintDialogue(List<string> dx)
+        {
+            foreach ( string line in dx )
+            {
+                Console.WriteLine(line);
+                Thread.Sleep(1000);
+                Console.Write(".");
+                Thread.Sleep(1000);
+                Console.Write(".");
+                Thread.Sleep(1000);
+                Console.Write(".");
+                Thread.Sleep(1000);
             }
         }
     }

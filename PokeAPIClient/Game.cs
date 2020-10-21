@@ -12,6 +12,12 @@ namespace PokeAPIClient
         {
 
         }
+
+        public void NewGame()
+        {
+            Program.PrintDialogue(Program.ReadDialogue("introDialogue.txt"));
+            PlayerCharacter player1 = new PlayerCharacter();
+        }
     }
 
     public class Character
