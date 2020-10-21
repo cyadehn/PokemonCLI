@@ -13,8 +13,7 @@ namespace PokeAPIClient
 
         static async Task Main(string[] args)
         {
-            await ProcessPokemon();
-            Player player1 = new Player();
+            PlayerCharacter player1 = new PlayerCharacter();
         }
 
         private static async Task ProcessPokemon()
