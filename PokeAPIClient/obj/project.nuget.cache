@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "uUGVSBwpuh2d/+jJv1gi67fgaBXm35d6S+1Ohi+1QpVOqeKXBN67kdOrA7FkVsEgccEZyJjEQu9jkkXQzydCtg==",
+  "success": true,
+  "projectFilePath": "/Users/christopherdehner/code_louisville/projects/treehouse/c#/pokeapi-app/PokeAPIClient/PokeAPIClient.csproj",
+  "expectedPackageFiles": [
+    "/Users/christopherdehner/.nuget/packages/system.text.json/4.7.2/system.text.json.4.7.2.nupkg.sha512"
+  ],
+  "logs": []
+}
