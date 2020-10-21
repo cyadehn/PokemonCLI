@@ -50,14 +50,14 @@ namespace PokeAPIClient
         {
             foreach ( string line in dx )
             {
-                Console.WriteLine(line);
+                Console.Write(line);
                 Thread.Sleep(1000);
-                Console.Write(".");
-                Thread.Sleep(1000);
-                Console.Write(".");
-                Thread.Sleep(1000);
-                Console.Write(".");
-                Thread.Sleep(1000);
+                for ( int i = 0; i < line.Length/15; i++ )
+                {
+                    Console.Write(".");
+                    Thread.Sleep(1000);
+                }
+                Console.Write("\n\r");
             }
         }
     }
