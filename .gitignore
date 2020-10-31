@@ -404,3 +404,6 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+
+# Ignore tags
+tags
