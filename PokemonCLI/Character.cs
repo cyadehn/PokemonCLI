@@ -10,7 +10,7 @@ namespace PokemonCLI
 
         public Character()
         {
-            Console.WriteLine("Please enter a name for your character: ");
+            Tools.Typewriter.WriteDialogue("Remind me... what is your name again?");
             Name = Console.ReadLine();
         }
     }

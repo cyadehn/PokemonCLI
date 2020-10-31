@@ -27,7 +27,6 @@ namespace PokemonCLI
         private IState gameState;
         public List<PlayerCharacter> Players { get; set; }
         public List<NPC> NonPlayerCharacters { get; set; }
-
         public PlayerData playerData { get; private set; }
 
         public Game(RestClient restClient)
@@ -44,7 +43,6 @@ namespace PokemonCLI
             }
             gameState.Start();
         }
-
         public void Start()
         {
             while ( gameState != null )
@@ -52,10 +50,8 @@ namespace PokemonCLI
                 gameState.Start();	
             }
         }
-
         public void TransitionTo(IState state)
         {}
-
         public void Quit()
         {
             gameState = null;
@@ -79,20 +75,39 @@ namespace PokemonCLI
             return dialogue;
         }
 
-        public static void Typewriter(string line)
+        public static class Typewriter
         {
-            foreach (char c in line)
-            {
-                Console.Write(c);
-                Thread.Sleep(15);
-            }
+            public static void WriteDialogue(string line)
+                {
+                    foreach (char c in line)
+                    {
+                        Console.Write(c);
+                        CharacterDelay(c);
+                    }
+                    Console.Write("\n\r");
+                }
+            private static void CharacterDelay(char c)
+                {
+                    if (c == '.' )
+                    {
+                        Thread.Sleep(300);
+                    }
+                    else if ( c == ',' )
+                    {
+                        Thread.Sleep(50);
+                    }
+                    else 
+                    {
+                        Thread.Sleep(15);
+                    }
+                }
         }
 
         public static void PrintDialogue(List<string> dx)
         {
             foreach ( string line in dx )
             {
-                Typewriter(line);
+                Typewriter.WriteDialogue(line);
                 Thread.Sleep(1000);
                 for ( int i = 0; i < line.Length/15; i++ )
                 {
