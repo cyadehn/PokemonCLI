@@ -11,17 +11,17 @@ namespace PokemonCLI
         private IState gameState;
         public List<PlayerCharacter> Players { get; set; }
         public List<NPC> NonPlayerCharacters { get; set; }
-        public PlayerData playerData { get; private set; }
+        public PlayerData LoadedData { get; private set; }
 
-        public Game(RestClient restClient)
+        public Game(RestClient restClient, PlayerData loadedData)
         {
             _restClient = restClient;
-            playerData = new PlayerData();
-            if ( playerData.Continue == true )
+            LoadedData = loadedData;
+            if ( LoadedData.Continue == true )
             {
                 gameState = new ContinueState();//TODO: START HERE, FURTHER DEFINE STATE INTERFACE, THEN MOVE ON TO CONCRETE STATES
             }
-            else if ( playerData.Continue != true )
+            else if ( LoadedData.Continue != true )
             {
                 gameState = new NewGameState();
             }
@@ -38,7 +38,7 @@ namespace PokemonCLI
         {}
         public void Quit()
         {
-            gameState = null;
+            //serialize playerdata into save file
         }
     }
 }
