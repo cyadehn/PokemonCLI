@@ -26,10 +26,11 @@ namespace PokemonCLI
             public void End()
             {
             }
-            public void NewGame()
+            public PlayerCharacter NewGame()
             {
-                Tools.PrintDialogue(Tools.ReadDialogue("introDialogue.txt"));
-                PlayerCharacter player1 = new PlayerCharacter(Program.userInput);
+                Tools.PrintDialogue(Tools.ParseScript("introDialogue.txt"));
+                PlayerCharacter character = new PlayerCharacter(Program.userInput);
+                return character;
             }
         }
     public class ContinueState : IState

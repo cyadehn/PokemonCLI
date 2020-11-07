@@ -16,7 +16,7 @@ namespace PokemonCLI.Tests
             Assert.Equal(target.Name, expected);
         }
         [Fact]
-        public void Character_Constructor_UserInputNull()
+        public void Character_Constructor_UserInputNullReturnsKid()
         {
             IUserInput userInput = new MockNullUserInput();
             string expected = "Kid";

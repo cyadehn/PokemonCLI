@@ -19,7 +19,7 @@ namespace PokemonCLI
         //          3. DXEngine function:
         //                  On State start...   call Init(fileName) for the scene
         //                                      DXEngine will read the lines and run commands (using the this object passed in for scene specific actions?)
-        public static List<string> ReadDialogue(string fileName)
+        public static List<string> ParseScript(string fileName)
         {
             List<string> dialogue = new List<string>();
             string fileLocation = string.Format("dialogue/{0}", fileName);
