@@ -4,11 +4,11 @@ using RestSharp;
 
 namespace PokemonCLI
 {
-    public class Game 
+    public class Game : IGame
     {
         private static RestClient _restClient;
         private PokeRepository _pokeRepository = new PokeRepository(_restClient);
-        private IState _gameState;
+        public IState GameState { get; private set; }
         public List<PlayerCharacter> Players { get; set; }
         public List<NPC> NonPlayerCharacters { get; set; }
         public PlayerData LoadedData { get; private set; }
@@ -19,29 +19,38 @@ namespace PokemonCLI
             LoadedData = loadedData;
             if ( LoadedData.Continue == true )
             {
-                this.TransitionTo(new ContinueState());
+                this.GameState = new ContinueState();
             }
             else if ( LoadedData.Continue != true )
             {
-                this.TransitionTo(new NewGameState())
+                this.GameState = new NewGameState();
             }
-            _gameState.Start();
+        }
+        public void Start()
+        {
+            GameState.Start();
         }
         public void TransitionTo(IState state)
         {
-            this._gameState = state;
-            this._gameState.SetContext(this);
-            _gameState.Start();
+            this.GameState = state;
+            this.GameState.SetContext(this);
+            GameState.Start();
         }
         public void TransitionTo(IState state, PlayerCharacter player)
         {
             Players.Add(player);
-            gameState = state;
-            gameState.Start();
+            GameState = state;
+            GameState.Start();
         }
-        public void Quit(PlayerData saveData)
+        public void Quit()
         {
             //serialize playerdata into save file
         }
+    }
+    public interface IGame
+    {
+        void Start();
+        void TransitionTo(IState state);
+        void Quit();
     }
 }

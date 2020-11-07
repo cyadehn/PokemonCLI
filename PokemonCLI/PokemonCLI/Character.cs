@@ -7,12 +7,10 @@ namespace PokemonCLI
         public string Name { get; private set; }
         //public List<Pokemon> Pokemon { get; private set; }
         //public List<Item> Items { get; private set; }
-
         public Character(IUserInput userInput)
         {
             SetCharacterName(userInput);
         }
-
         public void SetCharacterName(IUserInput userInput)
         {
             string inputName = userInput.GetUserInput("Remind me... what is your name again?");
