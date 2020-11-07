@@ -12,8 +12,8 @@ namespace PokemonCLI
         static void Main(string[] args) 
         {
             Console.WriteLine("Game is starting!");
-            Game game = new Game(restClient);
-            game.Start();
+            PlayerData loadedData = new PlayerData();
+            Game game = new Game(restClient, loadedData);
         }
     }
 }
