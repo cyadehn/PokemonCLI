@@ -5,7 +5,6 @@ namespace PokemonCLI
             void Start();
             void End();
         }
-
     public class NewGameState : IState
         {
             public void Start()
@@ -18,10 +17,9 @@ namespace PokemonCLI
             public void NewGame()
             {
                 Tools.PrintDialogue(Tools.ReadDialogue("introDialogue.txt"));
-                PlayerCharacter player1 = new PlayerCharacter();
+                PlayerCharacter player1 = new PlayerCharacter(Program.userInput);
             }
         }
-
     public class ContinueState : IState
         {
             public void End()

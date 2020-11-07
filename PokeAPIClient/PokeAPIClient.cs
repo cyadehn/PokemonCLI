@@ -1,5 +1,4 @@
 using System;
-using PokemonCLI;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -9,6 +8,7 @@ namespace PokeAPIClient
 {
     public class PokeRepository
     {
+        // TODO: Define dictionary for PokeAPI Endpoint Names / URIs
         private readonly string _endpoint = "https://pokeapi.co/api/v2/";
         private string _kantoEndpoint;
 
@@ -18,7 +18,6 @@ namespace PokeAPIClient
             RestClient = restClient;
             _kantoEndpoint = string.Format("{0}{1}", _endpoint, "pokedex/kanto/");
         }
-
         //private async Task GetKantoPokemon()
         //{
             //Program.GlobalClient.DefaultRequestHeaders.Accept.Clear();
