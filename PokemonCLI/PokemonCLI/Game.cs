@@ -7,8 +7,8 @@ namespace PokemonCLI
     public class Game 
     {
         private static RestClient _restClient;
-        private PokeRepository pokeRepository = new PokeRepository(_restClient);
-        private IState gameState;
+        private PokeRepository _pokeRepository = new PokeRepository(_restClient);
+        private IState _gameState;
         public List<PlayerCharacter> Players { get; set; }
         public List<NPC> NonPlayerCharacters { get; set; }
         public PlayerData LoadedData { get; private set; }
@@ -19,24 +19,27 @@ namespace PokemonCLI
             LoadedData = loadedData;
             if ( LoadedData.Continue == true )
             {
-                gameState = new ContinueState();//TODO: START HERE, FURTHER DEFINE STATE INTERFACE, THEN MOVE ON TO CONCRETE STATES
+                this.TransitionTo(new ContinueState());
             }
             else if ( LoadedData.Continue != true )
             {
-                gameState = new NewGameState();
+                this.TransitionTo(new NewGameState())
             }
-            gameState.Start();
-        }
-        public void Start()
-        {
-            while ( gameState != null )
-            {
-                gameState.Start();	
-            }
+            _gameState.Start();
         }
         public void TransitionTo(IState state)
-        {}
-        public void Quit()
+        {
+            this._gameState = state;
+            this._gameState.SetContext(this);
+            _gameState.Start();
+        }
+        public void TransitionTo(IState state, PlayerCharacter player)
+        {
+            Players.Add(player);
+            gameState = state;
+            gameState.Start();
+        }
+        public void Quit(PlayerData saveData)
         {
             //serialize playerdata into save file
         }
