@@ -23,7 +23,9 @@ namespace PokemonCLI
             }
             else if ( LoadedData.Continue != true )
             {
+                Players = new List<PlayerCharacter>();
                 this.GameState = new NewGameState();
+                this.GameState.SetContext(this);
             }
         }
         public void Start()
