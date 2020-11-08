@@ -1,19 +1,17 @@
-using System;
-
 namespace PokemonCLI
 {
     public interface IState //interface defines universal handles for Game class to start scenes/states after initialization
     {
         string Name { get; }
-        Game Context { get; }
+        IGame CurrentGame { get; }
         void Start();
-        void SetContext(Game game);
+        void SetContext(IGame currentGame);
     }
     public class NewGameState : IState
     {
         public string Name { get; } = "New GameState";
         private ICutscene _cutscene;
-        public Game Context { get; private set; }
+        public IGame CurrentGame { get; private set; }
         public NewGameState()
         {
         }
@@ -21,11 +19,11 @@ namespace PokemonCLI
         {
             PlayerCharacter player = NewGame(); 
             IState state = new ContinueState();
-            Context.TransitionTo(state, player); 
+            CurrentGame.TransitionTo(state, player); 
         }
-        public void SetContext(Game game)
+        public void SetContext(IGame currentGame)
         {
-            Context = game;
+            this.CurrentGame = currentGame;
         }
         public PlayerCharacter NewGame()
         {
@@ -38,8 +36,7 @@ namespace PokemonCLI
     public class ContinueState : IState
     {
         public string Name { get; private set; } = "Continue GameState";
-        public Game Context { get; private set; }
-        public Game CurrentGame {get;}
+        public IGame CurrentGame { get; private set; }
         public ContinueState()
         {
         }
@@ -47,9 +44,9 @@ namespace PokemonCLI
         {
 
         }
-        public void SetContext(Game game)
+        public void SetContext(IGame currentGame)
         {
-            this.Context = game;
+            this.CurrentGame = currentGame;
         }
     }
 }

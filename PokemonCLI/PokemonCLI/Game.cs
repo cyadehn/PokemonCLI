@@ -21,12 +21,12 @@ namespace PokemonCLI
             {
                 this.GameState = new ContinueState();
             }
-            else if ( LoadedData.Continue != true )
+            else 
             {
                 Players = new List<PlayerCharacter>();
                 this.GameState = new NewGameState();
-                this.GameState.SetContext(this);
             }
+            this.GameState.SetContext(this);
         }
         public void Start()
         {
@@ -51,8 +51,10 @@ namespace PokemonCLI
     }
     public interface IGame
     {
+        IState GameState { get; }
         void Start();
         void TransitionTo(IState state);
+        void TransitionTo(IState state, PlayerCharacter player);
         void Quit();
     }
 }
