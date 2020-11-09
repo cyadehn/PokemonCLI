@@ -23,7 +23,7 @@ namespace PokeAPIClient
         public PokedexResponse GetPokedex(string region)
         {
             region = (region == "") ? region = "kanto" : region;
-            var request = new RestRequest(string.Format("pokedex/{0}", region));
+            var request = new RestRequest(string.Format("pokedex/{0}", region), Method.GET);
             IRestResponse<PokedexResponse> response = Client.Execute<PokedexResponse>(request);
             if (response.StatusCode != HttpStatusCode.OK)
             {
@@ -39,6 +39,10 @@ namespace PokeAPIClient
             IRestResponse<PokedexIndexResponse> response = Client.Execute<PokedexIndexResponse>(request);
             dexCount = response.Data.Count;
             return dexCount;
+        }
+        public List<string> GetPokedexNames()
+        {
+            throw new NotImplementedException();
         }
     }
     public interface IPokeRepository
