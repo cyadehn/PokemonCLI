@@ -37,7 +37,7 @@ namespace PokeAPIClient
             int dexCount;
             var request = new RestRequest("pokedex", Method.GET);
             IRestResponse<PokedexIndexResponse> response = Client.Execute<PokedexIndexResponse>(request);
-            dexCount = response.Data.Count;
+            dexCount = response.Data.Results.Count();
             return dexCount;
         }
         public List<string> GetPokedexNames()
