@@ -15,11 +15,12 @@ namespace PokeAPIClient.Tests
             List<PokemonSpecies> target = pokeRepo.GetPokemon("string");
             Assert.IsType<List<PokemonSpecies>>(target);
         }
-        [Fact]
-        public void PokeRepository_GetPokemon_PassingValidStringReturnsListWithCountGreaterThanZero()
+        [Theory]
+        [ClassData(typeof(PokedexNameGenerator))]
+        public void PokeRepository_GetPokemon_PassingValidStringReturnsListWithCountGreaterThanZero(string name)
         {
             var pokeRepo = new PokeRepository(Client);
-            List<PokemonSpecies> target = pokeRepo.GetPokemon("kanto");
+            List<PokemonSpecies> target = pokeRepo.GetPokemon(name);
             bool expected = target.Count > 0;
             Assert.True(expected);
             Assert.NotNull(target);
