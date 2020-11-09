@@ -10,6 +10,7 @@ namespace PokemonCLI
         // TODO: Implement a class for reading "script" files
         //          1. Scripts.txt files will define lines with different syntax prefixes to determine the action to take
         //                  examples: * = "DXEngine.PrintDialogue()", ACT = "IAction.Start()", X = "DXEngine.Stop()"
+        //          1.5. Actions dictionary<string, delegate> will store the prefixes with corresponding delegates
         //          2. DXEngine -- define the following methods:
         //                  1. .Init(string fileName, IState current);
         //                  2. .StartPerformance(List<action>);
@@ -18,6 +19,7 @@ namespace PokemonCLI
         //          3. DXEngine function:
         //                  On State start...   call Init(fileName) for the scene
         //                                      DXEngine will read the lines and run commands (using the this object passed in for scene specific actions?)
+        // TODO: Refactor ParseScript to use .resources files (using Resgen.exe?)
         public static List<string> ParseScript(string fileName)
         {
             List<string> dialogue = new List<string>();
