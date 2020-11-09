@@ -1,5 +1,4 @@
 using Xunit;
-using System;
 using RestSharp;
 using System.Collections.Generic;
 
