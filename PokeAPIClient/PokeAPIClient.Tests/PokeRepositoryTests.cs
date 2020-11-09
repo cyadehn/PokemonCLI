@@ -23,6 +23,10 @@ namespace PokeAPIClient.Tests
             Assert.True(expected);
             Assert.NotNull(target);
         }
+        //[Fact]
+        //public void PokeRepository_GetPokemon_ReturnsNullIfStatusCodeIsNotOK()
+        //{
+        //}
         [Theory]
         [InlineData("kanto")]
         public void PokeRepository_GetPokedex_PassingValidStringReturnsCorrectPokedexResponse(string region)
@@ -38,6 +42,10 @@ namespace PokeAPIClient.Tests
             PokedexResponse target = pokeRepo.GetPokedex("");
             Assert.True(target.Name == "kanto");
         }
+        //[Fact]
+        //public void PokeRepository_GetPokedex_ReturnsNullIfStatusCodeIsNotOK()
+        //{
+        //}
         [Fact]
         public void PokeRepository_GetPokedexCount_ReturnsTypeInt()
         {
@@ -45,5 +53,9 @@ namespace PokeAPIClient.Tests
             int target = pokeRepo.GetPokedexCount();
             Assert.IsType<int>(target);
         }
+        //[Fact]
+        //public void PokeRepository_GetPokedexCount_ReturnsNullIfStatusCodeIsNotOK()
+        //{
+        //}
     }
 }
