@@ -57,5 +57,16 @@ namespace PokeAPIClient.Tests
         //public void PokeRepository_GetPokedexCount_ReturnsNullIfStatusCodeIsNotOK()
         //{
         //}
+        [Fact]
+        public void PokeRepository_GetPokedexNames_ReturnsListOfStrings()
+        {
+            var pokeRepo = new PokeRepository(Client);
+            List<string> target = pokeRepo.GetPokedexNames();
+            Assert.IsType<List<string>>(target);
+        }
+        //[Fact]
+        //public void PokeRepository_GetPokedexNames_ReturnsNullIfStatusCodeIsNotOK()
+        //{
+        //}
     }
 }
