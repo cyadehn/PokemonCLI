@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Net;
 using System.Collections.Generic;
@@ -30,6 +31,14 @@ namespace PokeAPIClient
                 response = Client.Execute<PokedexResponse>(request);
             }
             return response.Data;
+        }
+        public int GetPokedexCount()
+        {
+            int dexCount;
+            var request = new RestRequest("pokedex", Method.GET);
+            IRestResponse<PokedexIndexResponse> response = Client.Execute<PokedexIndexResponse>(request);
+            dexCount = response.Data.Count;
+            return dexCount;
         }
     }
     public interface IPokeRepository

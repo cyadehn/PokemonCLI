@@ -38,5 +38,12 @@ namespace PokeAPIClient.Tests
             PokedexResponse target = pokeRepo.GetPokedex("");
             Assert.True(target.Name == "kanto");
         }
+        [Fact]
+        public void PokeRepository_GetPokedexCount_ReturnsTypeInt()
+        {
+            var pokeRepo = new PokeRepository(Client);
+            int target = pokeRepo.GetPokedexCount();
+            Assert.IsType<int>(target);
+        }
     }
 }
