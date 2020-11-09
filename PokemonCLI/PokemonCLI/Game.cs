@@ -1,21 +1,18 @@
 using System.Collections.Generic;
 using PokeAPIClient;
-using RestSharp;
 
 namespace PokemonCLI
 {
     public class Game : IGame
     {
-        private static RestClient _restClient;
-        private PokeRepository _pokeRepository = new PokeRepository(_restClient);
+        private PokeRepository _pokeRepository = new PokeRepository();
         public IState GameState { get; private set; }
         public List<PlayerCharacter> Players { get; set; }
         public List<NPC> NonPlayerCharacters { get; set; }
         public PlayerData LoadedData { get; private set; }
 
-        public Game(RestClient restClient, PlayerData loadedData)
+        public Game(PlayerData loadedData)
         {
-            _restClient = restClient;
             LoadedData = loadedData;
             if ( LoadedData.Continue == true )
             {
