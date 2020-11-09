@@ -42,7 +42,15 @@ namespace PokeAPIClient
         }
         public List<string> GetPokedexNames()
         {
-            throw new NotImplementedException();
+            List<string> pokedexNames;
+            int dexCount = GetPokedexCount();
+            var request = new RestRequest("pokedex?limit={limit}", Method.GET);
+            request.AddUrlSegment("limit", string.Format("{0}", dexCount));
+            IRestResponse<PokedexIndexResponse> response = Client.Execute<PokedexIndexResponse>(request);
+            pokedexNames = response.Data.Results
+                .Select( r => r.Name )
+                .ToList();
+            return pokedexNames;
         }
     }
     public interface IPokeRepository

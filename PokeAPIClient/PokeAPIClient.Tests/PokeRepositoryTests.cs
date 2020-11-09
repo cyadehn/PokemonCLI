@@ -1,4 +1,5 @@
 using Xunit;
+using System;
 using RestSharp;
 using System.Collections.Generic;
 
@@ -51,6 +52,7 @@ namespace PokeAPIClient.Tests
         {
             var pokeRepo = new PokeRepository(Client);
             int target = pokeRepo.GetPokedexCount();
+            Console.WriteLine($"The number of available pokedexes is {target}");
             Assert.IsType<int>(target);
         }
         //[Fact]
@@ -62,7 +64,12 @@ namespace PokeAPIClient.Tests
         {
             var pokeRepo = new PokeRepository(Client);
             List<string> target = pokeRepo.GetPokedexNames();
+            foreach ( string name in target )
+            {
+                Console.WriteLine(name);
+            }
             Assert.IsType<List<string>>(target);
+            Assert.NotNull(target);
         }
         //[Fact]
         //public void PokeRepository_GetPokedexNames_ReturnsNullIfStatusCodeIsNotOK()
