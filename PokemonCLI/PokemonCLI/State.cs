@@ -10,7 +10,6 @@ namespace PokemonCLI
     public class NewGameState : IState
     {
         public string Name { get; } = "New GameState";
-        private ICutscene _cutscene;
         public IGame CurrentGame { get; private set; }
         public NewGameState()
         {
@@ -27,8 +26,8 @@ namespace PokemonCLI
         }
         public PlayerCharacter NewGame()
         {
-            _cutscene = new Cutscene("introDialogue.txt");
-            //_cutscene.Run();
+            Cutscene cutscene = new Cutscene("introDialogue.txt");
+            //cutscene.Run();
             PlayerCharacter character = new PlayerCharacter(Program.userInput);
             return character;
         }

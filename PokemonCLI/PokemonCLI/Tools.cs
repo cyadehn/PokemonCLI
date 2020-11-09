@@ -21,7 +21,7 @@ namespace PokemonCLI
         public static List<string> ParseScript(string fileName)
         {
             List<string> dialogue = new List<string>();
-            string fileLocation = string.Format("dialogue/{0}", fileName);
+            string fileLocation = string.Format("/Users/christopherdehner/Code/projects/dotnet/pokeapi-app/PokemonCLI/PokemonCLI/dialogue/{0}", fileName);
             using ( var reader = new StreamReader(fileLocation))
             {
                 string line;
