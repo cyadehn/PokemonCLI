@@ -7,13 +7,13 @@ namespace PokemonCLI.Tests
     public class MockGame : IGame
     {
         public IState GameState { get; private set; }
-        public PokeRepository PokeRepository { get; private set; }
+        public PokeAPI PokeAPI { get; private set; }
         public PlayerData LoadedData { get; private set; }
         public List<PlayerCharacter> Players { get; private set; }
         public List<NPC> NonPlayerCharacters { get; private set; }
-        public MockGame(RestClient client, PlayerData loadedData)
+        public MockGame(PlayerData loadedData)
         {
-            PokeRepository = new PokeRepository(client);
+            PokeAPI = new PokeAPI();
             LoadedData = loadedData;
             if ( LoadedData.Continue == true )
             {

@@ -15,7 +15,7 @@ namespace PokemonCLI.Tests
         public StateTests()
         {
             PlayerData = new PlayerData();
-            CurrentGame = new Game(Client, PlayerData);
+            CurrentGame = new Game(PlayerData);
         }
         [Fact]
         public void NewGameState_SetRegion_ReturnsListOfPokemonOnInputKanto()
@@ -25,7 +25,7 @@ namespace PokemonCLI.Tests
 
             newGame.SetContext(CurrentGame);
             newGame.SetRegion(userInput);
-            List<PokemonSpecies> expected = CurrentGame.PokeRepository.GetPokemon(userInput.GetUserInput(""));
+            List<PokemonSpecies> expected = CurrentGame.PokeAPI.PokeRepository.GetPokemon(userInput.GetUserInput(""));
 
             Assert.IsType<List<PokemonSpecies>>(CurrentGame.LoadedData.GameData.Region.Pokemon);
         }
@@ -37,7 +37,7 @@ namespace PokemonCLI.Tests
 
             newGame.SetContext(CurrentGame);
             newGame.SetRegion(userInput);
-            List<PokemonSpecies> expected = CurrentGame.PokeRepository.GetPokemon(userInput.GetUserInput(""));
+            List<PokemonSpecies> expected = CurrentGame.PokeAPI.PokeRepository.GetPokemon(userInput.GetUserInput(""));
             Assert.True(expected.All(e => CurrentGame.LoadedData.GameData.Region.Pokemon.Contains(e, new PokemonSpeciesComparer())));
             Assert.True(CurrentGame.LoadedData.GameData.Region.Pokemon.Count == expected.Count);
         }

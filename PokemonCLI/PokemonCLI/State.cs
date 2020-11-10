@@ -37,11 +37,11 @@ namespace PokemonCLI
         }
         public void SetRegion(IUserInput userInput)
         {
-            List<string> regionNames = CurrentGame.PokeRepository.GetPokedexNames();
+            List<string> regionNames = CurrentGame.PokeAPI.PokeRepository.GetPokedexNames();
             Tools.Typewriter.WriteDialogue("Please select your region: ");
             Tools.PrintToConsole(regionNames);
             string selection = userInput.GetUserInput();
-            List<PokemonSpecies> regionalPokemon = CurrentGame.PokeRepository.GetPokemon(selection);
+            List<PokemonSpecies> regionalPokemon = CurrentGame.PokeAPI.PokeRepository.GetPokemon(selection);
             CurrentGame.LoadedData.SetRegion(selection, regionalPokemon);
         }
     }
