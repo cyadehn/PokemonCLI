@@ -407,3 +407,6 @@ ASALocalRun/
 
 # Ignore tags
 tags
+ 
+# Ignore vscode files
+**/.vscode
