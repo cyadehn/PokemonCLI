@@ -11,7 +11,7 @@ namespace PokemonCLI
         }
         public override void SetCharacterName(IUserInput userInput)
         {
-            string inputName = userInput.GetUserInput("Remind me... what is your name again?");
+            string inputName = userInput.GetUserInput("Please enter your first name: ");
             if ( !string.IsNullOrWhiteSpace(inputName) )
             {
                 Name = inputName;

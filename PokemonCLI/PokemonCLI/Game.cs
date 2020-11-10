@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using PokeAPIClient;
 
 namespace PokemonCLI
@@ -7,13 +6,10 @@ namespace PokemonCLI
     {
         public PokeAPI PokeAPI { get; private set; }
         public IState GameState { get; private set; }
-        public List<PlayerCharacter> Players { get; set; }
-        public List<NPC> NonPlayerCharacters { get; set; }
         public PlayerData LoadedData { get; private set; }
-
-        public Game(PlayerData loadedData)
+        public Game(PokeAPI api, PlayerData loadedData)
         {
-            PokeAPI = new PokeAPI();
+            PokeAPI = api;
             LoadedData = loadedData;
             if ( LoadedData.Continue == true )
             {
@@ -21,8 +17,8 @@ namespace PokemonCLI
             }
             else 
             {
-                Players = new List<PlayerCharacter>();
-                this.GameState = new NewGameState();
+                Cutscene cutscene = new Cutscene("introDialogue.txt");
+                cutscene.Run();
             }
             this.GameState.SetContext(this);
         }
@@ -36,12 +32,6 @@ namespace PokemonCLI
             this.GameState.SetContext(this);
             GameState.Start();
         }
-        public void TransitionTo(IState state, PlayerCharacter player)
-        {
-            Players.Add(player);
-            GameState = state;
-            GameState.Start();
-        }
         public void Quit()
         {
             //serialize playerdata into save file
@@ -51,12 +41,9 @@ namespace PokemonCLI
     {
         PokeAPI PokeAPI { get; }
         IState GameState { get; }
-        List<PlayerCharacter> Players { get; }
-        List<NPC> NonPlayerCharacters { get; }
         PlayerData LoadedData { get; }
         void Start();
         void TransitionTo(IState state);
-        void TransitionTo(IState state, PlayerCharacter player);
         void Quit();
     }
 }
