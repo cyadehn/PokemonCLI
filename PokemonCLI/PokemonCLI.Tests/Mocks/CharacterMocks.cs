@@ -14,4 +14,11 @@ namespace PokemonCLI.Tests
             return "";
         }
     }
+    public class MockKantoUserInput : PokemonCLI.IUserInput
+    {
+        public string GetUserInput(string prompt)
+        {
+            return "kanto";
+        }
+    }
 }

@@ -50,7 +50,11 @@ namespace PokemonCLI
     }
     public interface IGame
     {
+        PokeRepository PokeRepository { get; }
         IState GameState { get; }
+        List<PlayerCharacter> Players { get; }
+        List<NPC> NonPlayerCharacters { get; }
+        PlayerData LoadedData { get; }
         void Start();
         void TransitionTo(IState state);
         void TransitionTo(IState state, PlayerCharacter player);
