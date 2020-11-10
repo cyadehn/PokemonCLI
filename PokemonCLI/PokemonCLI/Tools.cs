@@ -75,9 +75,22 @@ namespace PokemonCLI
                 Console.Write("\n\r");
             }
         }
+        public static void PrintToConsole(List<string> text)
+        {
+            foreach ( string line in text )
+            {
+                Typewriter.WriteDialogue(line);
+                Console.Write("\n\r");
+            }
+        }
     }
     public class UserInput : IUserInput
     {
+        public string GetUserInput()
+        {
+            Console.WriteLine();
+            return Console.ReadLine();
+        }
         public string GetUserInput(string prompt)
         {
             Tools.Typewriter.WriteDialogue(prompt);
@@ -87,5 +100,6 @@ namespace PokemonCLI
     public interface IUserInput
     {
         string GetUserInput(string prompt);
+        string GetUserInput();
     }
 }

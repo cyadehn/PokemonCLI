@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using PokeAPIClient;
+
 namespace PokemonCLI
 {
     public interface IState //interface defines universal handles for Game class to start scenes/states after initialization
@@ -26,10 +29,20 @@ namespace PokemonCLI
         }
         public PlayerCharacter NewGame()
         {
+            SetRegion(Program.userInput);
             Cutscene cutscene = new Cutscene("introDialogue.txt");
-            //cutscene.Run();
+            cutscene.Run();
             PlayerCharacter character = new PlayerCharacter(Program.userInput);
             return character;
+        }
+        public void SetRegion(IUserInput userInput)
+        {
+            List<string> regionNames = CurrentGame.PokeRepository.GetPokedexNames();
+            Tools.Typewriter.WriteDialogue("Please select your region: ");
+            Tools.PrintToConsole(regionNames);
+            string selection = userInput.GetUserInput();
+            List<PokemonSpecies> regionalPokemon = CurrentGame.PokeRepository.GetPokemon(selection);
+            CurrentGame.LoadedData.SetRegion(selection, regionalPokemon);
         }
     }
     public class ContinueState : IState

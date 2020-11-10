@@ -1,4 +1,5 @@
 using Xunit;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using PokeAPIClient;
@@ -9,35 +10,48 @@ namespace PokemonCLI.Tests
     public class StateTests
     {
         public RestClient Client { get; private set; } = new RestClient("https://pokeapi.co/api/v2/");
+        public PlayerData PlayerData { get; private set; }
+        public Game CurrentGame { get; private set; }
+        public StateTests()
+        {
+            PlayerData = new PlayerData();
+            CurrentGame = new Game(Client, PlayerData);
+        }
         [Fact]
         public void NewGameState_SetRegion_ReturnsListOfPokemonOnInputKanto()
         {
             IUserInput userInput = new MockKantoUserInput();
-            PlayerData playerData = new PlayerData();
-            Game target = new Game(Client, playerData);
             NewGameState newGame = new NewGameState();
 
-            newGame.SetContext(target);
+            newGame.SetContext(CurrentGame);
             newGame.SetRegion(userInput);
-            List<PokemonSpecies> expected = target.PokeRepository.GetPokemon(userInput.GetUserInput(""));
+            List<PokemonSpecies> expected = CurrentGame.PokeRepository.GetPokemon(userInput.GetUserInput(""));
 
-            Assert.IsType<List<PokemonSpecies>>(target.LoadedData.GameData.Region.Pokemon);
+            Assert.IsType<List<PokemonSpecies>>(CurrentGame.LoadedData.GameData.Region.Pokemon);
         }
         [Fact]
         public void NewGameState_SetRegion_ReturnCorrectListOfPokemonOnInputKanto()
         {
             IUserInput userInput = new MockKantoUserInput();
-            PlayerData playerData = new PlayerData();
-            IGame target = new Game(Client, playerData);
-            IState newGame = new NewGameState();
+            NewGameState newGame = new NewGameState();
 
-            newGame.SetContext(target);
+            newGame.SetContext(CurrentGame);
             newGame.SetRegion(userInput);
-            List<PokemonSpecies> expected = target.PokeRepository.GetPokemon(userInput.GetUserInput(""));
-
-            Assert.True(expected.All(e => target.LoadedData.GameData.Region.Pokemon.Contains(e)));
-            Assert.True(target.LoadedData.GameData.Region.Pokemon.Count == expected.Count);
+            List<PokemonSpecies> expected = CurrentGame.PokeRepository.GetPokemon(userInput.GetUserInput(""));
+            Assert.True(expected.All(e => CurrentGame.LoadedData.GameData.Region.Pokemon.Contains(e, new PokemonSpeciesComparer())));
+            Assert.True(CurrentGame.LoadedData.GameData.Region.Pokemon.Count == expected.Count);
         }
-
+    }
+    public class PokemonSpeciesComparer : IEqualityComparer<PokemonSpecies>
+    {
+        public bool Equals(PokemonSpecies x, PokemonSpecies y)
+        {
+            return x.Name == y.Name
+                && x.Url == y.Url;
+        }
+        public int GetHashCode(PokemonSpecies obj)
+        {
+            return obj.Name.GetHashCode() + obj.Url.GetHashCode();
+        }
     }
 }

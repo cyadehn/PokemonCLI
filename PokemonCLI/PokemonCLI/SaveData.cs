@@ -11,6 +11,11 @@ namespace PokemonCLI
         {
             Continue = true;
         }
+        public void SetRegion(string name, List<PokemonSpecies> pokemon)
+        {
+            GameData.Region.Name = name;
+            GameData.Region.Pokemon = pokemon;
+        }
     }
     public class GameData
     {
