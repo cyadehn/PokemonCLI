@@ -1,26 +1,28 @@
 using Xunit;
+using RestSharp;
 
 namespace PokemonCLI.Tests
 {
     public class CharacterTests
     {
+        public RestClient Client { get; private set; } = new RestClient("https://pokeapi.co/api/v2/");
         [Fact]
-        public void Character_Constructor_UserInputString()
+        public void PlayerCharacter_SetCharacterName_UserInputString()
         {
             IUserInput userInput = new MockUserInput();
             string expected = userInput.GetUserInput("PROMPT STAND-IN");
 
-            Character target = new Character(userInput);
+            PlayerCharacter target = new PlayerCharacter(userInput);
 
             Assert.Equal(target.Name, expected);
         }
         [Fact]
-        public void Character_Constructor_UserInputNullReturnsKid()
+        public void PlayerCharacter_SetCharacterName_UserInputNullReturnsKid()
         {
             IUserInput userInput = new MockNullUserInput();
             string expected = "Kid";
 
-            Character target = new Character(userInput);
+            PlayerCharacter target = new PlayerCharacter(userInput);
 
             Assert.Equal(target.Name, expected);
         }
