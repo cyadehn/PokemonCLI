@@ -1,5 +1,5 @@
 using System;
-using System.IO;
+using System.Reflection;
 using System.Collections.Generic;
 using System.Threading;
 
@@ -20,20 +20,7 @@ namespace PokemonCLI
         //                  On State start...   call Init(fileName) for the scene
         //                                      DXEngine will read the lines and run commands (using the this object passed in for scene specific actions?)
         // TODO: Refactor ParseScript to use .resources files (using Resgen.exe?)
-        public static List<string> ParseScript(string fileName)
-        {
-            List<string> dialogue = new List<string>();
-            string fileLocation = string.Format("/Users/christopherdehner/Code/projects/dotnet/pokeapi-app/PokemonCLI/PokemonCLI/dialogue/{0}", fileName);
-            using ( var reader = new StreamReader(fileLocation))
-            {
-                string line;
-                while ( (line = reader.ReadLine()) != null )
-                {
-                    dialogue.Add(line);
-                }
-            }
-            return dialogue;
-        }
+        public static Assembly Assembly { get; private set; } = Assembly.GetExecutingAssembly();
         public static class Typewriter
         {
             public static void WriteDialogue(string line)

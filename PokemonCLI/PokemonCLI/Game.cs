@@ -6,19 +6,18 @@ namespace PokemonCLI
     {
         public PokeAPI PokeAPI { get; private set; }
         public IState GameState { get; private set; }
-        public PlayerData LoadedData { get; private set; }
-        public Game(PokeAPI api, PlayerData loadedData)
+        public SavedGame GameData { get; private set; }
+        public Game(PokeAPI api, SavedGame loadedData)
         {
             PokeAPI = api;
-            LoadedData = loadedData;
-            if ( LoadedData.Continue == true )
+            this.GameData = loadedData;
+            if ( this.GameData.IsNewPlayer == true )
+            {
+                this.GameState = new NewGameState();
+            }
+            else
             {
                 this.GameState = new ContinueState();
-            }
-            else 
-            {
-                Cutscene cutscene = new Cutscene("introDialogue.txt");
-                cutscene.Run();
             }
             this.GameState.SetContext(this);
         }
@@ -34,14 +33,14 @@ namespace PokemonCLI
         }
         public void Quit()
         {
-            //serialize playerdata into save file
+            //serialize SavedGame into save file
         }
     }
     public interface IGame
     {
         PokeAPI PokeAPI { get; }
         IState GameState { get; }
-        PlayerData LoadedData { get; }
+        SavedGame GameData { get; }
         void Start();
         void TransitionTo(IState state);
         void Quit();

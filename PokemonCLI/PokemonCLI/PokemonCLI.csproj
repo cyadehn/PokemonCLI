@@ -15,4 +15,7 @@
     <ProjectReference Include="..\..\PokeAPIClient\PokeAPIClient\PokeAPIClient.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="cutscene-scripts\*.txt" />
+  </ItemGroup>
 </Project>

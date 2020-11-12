@@ -3,23 +3,24 @@ using System.Collections.Generic;
 
 namespace PokemonCLI
 {
-    public class PlayerData
+    public class SavedGame
     {
         private PokeAPI PokeAPI { get; set; }
-        public bool Continue { get; private set; } = false;
+        public bool IsNewPlayer { get; private set; } = false;
         public Region Region { get; set; } = new Region();
         public List<PlayerCharacter> Players { get; set; }
         public List<NPC> NonPlayerCharacters { get; set; }
-        public PlayerData(PokeAPI api)
+        public SavedGame(PokeAPI api)
         {
             PokeAPI = api;
             Region = this.GetNewRegion();
             Players = new List<PlayerCharacter>();
             Players.Add(this.CreatePlayerCharacter());
+            IsNewPlayer = true;
         }
-        public void SavePlayerData()
+        public void SaveSavedGame()
         {
-            Continue = true;
+            IsNewPlayer = false;
         }
         public Region GetNewRegion()
         {
@@ -38,9 +39,6 @@ namespace PokemonCLI
             PlayerCharacter character = new PlayerCharacter(Program.userInput);
             return character;
         }
-    }
-    public class GameData
-    {
     }
     public class Region
     {
