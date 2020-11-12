@@ -7,7 +7,7 @@ namespace PokemonCLI.Tests
     {
         public GameStateGenerator()
         {
-            Add(new NewGameState());
+            //Add(new NewGameState());
             Add(new ContinueState());
         }
     }
