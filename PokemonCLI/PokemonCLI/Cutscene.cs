@@ -60,36 +60,4 @@ namespace PokemonCLI
             scene.Run();
         }
     }
-    public interface ICutscene
-    {
-        List<ISceneAction> Beats { get; }
-        void Run();
-    }
-    public class Cutscene : ICutscene
-    {
-        public List<ISceneAction> Beats { get; set; }
-        public void Run()
-        {
-            foreach (ISceneAction action in Beats)
-            {
-                action.Run();
-            }
-        }
-    }
-    public interface ISceneAction
-    {
-        void Run();
-    }
-    public class Dialogue : ISceneAction
-    {
-        public List<string> DialogueLines { get; set; }
-        public Dialogue(List<string> lines)
-        {
-            DialogueLines = lines;
-        }
-        public void Run()
-        {
-            Tools.PrintDialogue(DialogueLines);
-        }
-    }
 }
