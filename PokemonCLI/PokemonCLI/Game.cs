@@ -39,7 +39,6 @@ namespace PokemonCLI
     public interface IGame
     {
         PokeAPI PokeAPI { get; }
-        IState GameState { get; }
         SavedGame GameData { get; }
         void Start();
         void TransitionTo(IState state);
