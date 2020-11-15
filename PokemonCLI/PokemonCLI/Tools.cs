@@ -154,10 +154,10 @@ namespace PokemonCLI
         }
         public static void PrintDialogue(List<string> dx)
         {
-            Typewriter.PrintSubtle("Press 'Enter' to continue...");
             foreach ( string line in dx )
             {
                 Typewriter.PrintChars(line);
+                Typewriter.PrintSubtle("Press 'Enter' to continue...");
                 Typewriter.Pause();
             }
         }
