@@ -2,15 +2,15 @@ using RestSharp;
 
 namespace PokeAPIClient
 {
-    public class LocationRepository
+    public class PokeRepository : IPokeRepository
     {
         public RestClient Client { get; private set; }
-        public LocationRepository( RestClient client )
+        public PokeRepository(RestClient client)
         {
-
+            Client = client;
         }
     }
-    public interface ILocationRepository
+    public interface IPokeRepository
     {
         RestClient Client { get; }
     }

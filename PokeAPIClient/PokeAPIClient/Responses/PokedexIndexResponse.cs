@@ -7,7 +7,6 @@ namespace PokeAPIClient
         public string Name { get; set; } 
         public string Url { get; set; } 
     }
-
     public class PokedexIndexResponse    
     {
         public int Count { get; set; } 

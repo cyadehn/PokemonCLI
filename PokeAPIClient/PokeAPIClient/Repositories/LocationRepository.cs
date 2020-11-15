@@ -1,24 +1,16 @@
-using System;
 using System.Linq;
-using System.Net;
 using System.Collections.Generic;
+using System.Net;
 using RestSharp;
 
 namespace PokeAPIClient
 {
-    public class PokeRepository : IPokeRepository
+    public class LocationRepository : ILocationRepository
     {
         public RestClient Client { get; private set; }
-        public PokeRepository(RestClient client)
+        public LocationRepository( RestClient client )
         {
             Client = client;
-        }
-        public List<PokemonSpecies> GetPokemon(string region)
-        {
-            List<PokemonSpecies> pokemon = new List<PokemonSpecies>();
-            var pokedex = GetPokedex(region);
-            pokemon = pokedex.PokemonEntries.Select( e => e.PokemonSpecies ).ToList();
-            return pokemon;
         }
         public PokedexResponse GetPokedex(string region)
         {
@@ -37,23 +29,31 @@ namespace PokeAPIClient
             int dexCount;
             var request = new RestRequest("pokedex", Method.GET);
             IRestResponse<PokedexIndexResponse> response = Client.Execute<PokedexIndexResponse>(request);
-            dexCount = response.Data.Results.Count();
+            dexCount = response.Data.Results.Count;
             return dexCount;
         }
-        public List<string> GetPokedexNames()
+        public List<(string name, string description)> GetPokedexNamesAndDescriptions()
         {
-            List<string> pokedexNames;
+            List<(string name, string description)> output = new List<(string name, string description)>();
+            List<string> pokedexNames = new List<string>();
+
             int dexCount = GetPokedexCount();
             var request = new RestRequest("pokedex?limit={limit}", Method.GET);
             request.AddUrlSegment("limit", string.Format("{0}", dexCount));
             IRestResponse<PokedexIndexResponse> response = Client.Execute<PokedexIndexResponse>(request);
+
             pokedexNames = response.Data.Results
                 .Select( r => r.Name )
                 .ToList();
-            return pokedexNames;
+            List<PokedexResponse> pokedexResponses = new List<PokedexResponse>();
+            foreach ( string name in pokedexNames )
+            {
+                output.Add((name, GetPokedex(name).Descriptions[0].DescriptionStr));
+            }
+            return output;
         }
     }
-    public interface IPokeRepository
+    public interface ILocationRepository
     {
         RestClient Client { get; }
     }
