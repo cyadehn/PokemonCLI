@@ -41,6 +41,15 @@ namespace PokemonCLI
                 } while (key != ConsoleKey.Enter);
                 Console.Write("\n\r");
             }
+            public static void PrintPause(int num)
+            {
+                for ( int i = 0; i < num; i++ )
+                {
+                    Console.Write(".");
+                    Thread.Sleep(300);
+                }
+                Console.Write("\n\r");
+            }
             public static void PrintSubtle(string line)
             {
                 Console.ForegroundColor = ConsoleColor.DarkGray;
@@ -154,10 +163,10 @@ namespace PokemonCLI
         }
         public static void PrintDialogue(List<string> dx)
         {
+            Typewriter.PrintSubtle("Press 'Enter' to continue...");
             foreach ( string line in dx )
             {
                 Typewriter.PrintChars(line);
-                Typewriter.PrintSubtle("Press 'Enter' to continue...");
                 Typewriter.Pause();
             }
         }
@@ -168,6 +177,11 @@ namespace PokemonCLI
                 Typewriter.PrintChars(line);
                 Console.Write("\n\r");
             }
+        }
+        public static void PrintLoadingLine(List<string> text)
+        {
+            Console.Write("loading...");
+            Typewriter.Pause();
         }
     }
     public interface IUserInput

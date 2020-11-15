@@ -12,7 +12,9 @@ namespace PokemonCLI
         };
         private static Dictionary<string, Func<List<string>, ISceneAction>> _actionTypeMap = new Dictionary<string, Func<List<string>, ISceneAction>>()
         {
-            {"dialogue", (List<string> lines) => { return new Dialogue(lines); }}
+            {"dialogue", (List<string> lines) => { return new Dialogue(lines); }},
+            {"console", (List<string> lines) => { return new PrintLine(lines); }},
+            {"loading", (List<string> lines) => { return new LoadingLine(); }}
         };
         public static Cutscene ParseScript(string resourceName)
         {
