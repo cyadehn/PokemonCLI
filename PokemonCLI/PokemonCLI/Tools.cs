@@ -7,23 +7,23 @@ namespace PokemonCLI
 {
     public static class Tools
     {
-        // TODO: Implement a class for reading "script" files
-        //          1. Scripts.txt files will define lines with different syntax prefixes to determine the action to take
-        //                  examples: * = "DXEngine.PrintDialogue()", ACT = "IAction.Start()", X = "DXEngine.Stop()"
-        //          1.5. Actions dictionary<string, delegate> will store the prefixes with corresponding delegates
-        //          2. DXEngine -- define the following methods:
-        //                  1. .Init(string fileName, IState current);
-        //                  2. .StartPerformance(List<action>);
-        //                  3. .ActOn(IAction action);
-        //                  4. PrintDialogue(string line);
-        //          3. DXEngine function:
-        //                  On State start...   call Init(fileName) for the scene
-        //                                      DXEngine will read the lines and run commands (using the this object passed in for scene specific actions?)
-        // TODO: Refactor ParseScript to use .resources files (using Resgen.exe?)
         public static Assembly Assembly { get; private set; } = Assembly.GetExecutingAssembly();
+        public class UserInput : IUserInput
+        {
+            public string GetUserInput()
+            {
+                Console.WriteLine();
+                return Console.ReadLine();
+            }
+            public string GetUserInput(string prompt)
+            {
+                Tools.Typewriter.PrintChars(prompt);
+                return Console.ReadLine();
+            }
+        }
         public static class Typewriter
         {
-            public static void WriteDialogue(string line)
+            public static void PrintChars(string line)
                 {
                     foreach (char c in line)
                     {
@@ -52,12 +52,10 @@ namespace PokemonCLI
         {
             foreach ( string line in dx )
             {
-                Typewriter.WriteDialogue(line);
-                Thread.Sleep(1000);
-                for ( int i = 0; i < line.Length/15; i++ )
+                (int index, string option) output = (i, "");
+                if ( output.index > 0)
                 {
-                    Console.Write(".");
-                    Thread.Sleep(1000);
+                    output.index--;
                 }
                 Console.Write("\n\r");
             }
@@ -66,22 +64,9 @@ namespace PokemonCLI
         {
             foreach ( string line in text )
             {
-                Typewriter.WriteDialogue(line);
+                Typewriter.PrintChars(line);
                 Console.Write("\n\r");
             }
-        }
-    }
-    public class UserInput : IUserInput
-    {
-        public string GetUserInput()
-        {
-            Console.WriteLine();
-            return Console.ReadLine();
-        }
-        public string GetUserInput(string prompt)
-        {
-            Tools.Typewriter.WriteDialogue(prompt);
-            return Console.ReadLine();
         }
     }
     public interface IUserInput

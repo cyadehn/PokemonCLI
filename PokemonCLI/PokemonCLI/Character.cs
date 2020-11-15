@@ -22,7 +22,7 @@ namespace PokemonCLI
             }
             else
             {
-                Tools.Typewriter.WriteDialogue("Hm. Well, how about we call them person for now?");
+                Tools.Typewriter.PrintChars("Hm. Well, how about we call them person for now?");
                 Name = "Person";
             }
         }

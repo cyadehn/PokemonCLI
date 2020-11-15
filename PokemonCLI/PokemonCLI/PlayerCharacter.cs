@@ -18,7 +18,7 @@ namespace PokemonCLI
             }
             else
             {
-                Tools.Typewriter.WriteDialogue("Shy, huh? Well, how about we just call you Kid for now?");
+                Tools.Typewriter.PrintChars("Shy, huh? Well, how about we just call you Kid for now?");
                 Name = "Kid";
             }
         }

@@ -24,19 +24,14 @@ namespace PokemonCLI
         }
         public Region GetNewRegion()
         {
-            IUserInput input = Program.userInput;
             Region region = new Region();
-
-            Tools.Typewriter.WriteDialogue("Please select your region: ");
-            Tools.PrintToConsole(PokeAPI.PokeRepository.GetPokedexNames());
-
-            region.Name = input.GetUserInput();
+            Tools.Typewriter.PrintChars("Please select your region: ");
             region.Pokemon = PokeAPI.PokeRepository.GetPokemon(region.Name);
             return region;
         }
         public PlayerCharacter CreatePlayerCharacter()
         {
-            PlayerCharacter character = new PlayerCharacter(Program.userInput);
+            PlayerCharacter character = new PlayerCharacter(new Tools.UserInput());
             return character;
         }
     }
