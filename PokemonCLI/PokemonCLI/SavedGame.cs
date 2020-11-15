@@ -26,6 +26,7 @@ namespace PokemonCLI
         {
             Region region = new Region();
             Tools.Typewriter.PrintChars("Please select your region: ");
+            region.Name = Tools.GUI.ComboBox(PokeAPI.PokeRepository.GetPokedexNames());
             region.Pokemon = PokeAPI.PokeRepository.GetPokemon(region.Name);
             return region;
         }
