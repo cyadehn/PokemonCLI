@@ -44,13 +44,9 @@ namespace PokemonCLI
         }
         private static ISceneAction ParseScriptLine(string line)
         {
-            string[] splitLine = line.Split(' ', 2);
+            string[] splitLine = line.Split(", \"", 2);
             string actionType = splitLine[0];
-            List<string> parameters = new List<string>();
-            for ( var i = 1; i < splitLine.Length; i ++ )
-            {
-                parameters.Add(splitLine[i]);
-            }
+            List<string> parameters = new List<string>(splitLine[1].Split("\", \""));
             ISceneAction action = _actionTypeMap[actionType](parameters);
             return action;
         }
