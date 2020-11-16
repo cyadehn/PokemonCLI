@@ -25,10 +25,10 @@ namespace PokemonCLI
         public Region GetNewRegion()
         {
             Region region = new Region();
-            List<string> names = PokeAPI.PokeRepository.GetPokedexNames();
+            List<string> names = PokeAPI.LocationRepository.GetPokedexNames();
             Tools.Typewriter.PrintChars("Please select your region: ");
             region.Name = Tools.GUI.ComboBox(names);
-            region.Pokemon = PokeAPI.PokeRepository.GetPokemon(region.Name);
+            region.Pokemon = PokeAPI.PokeRepository.GetRegionalPokemon(region.Name);
             return region;
         }
         public PlayerCharacter CreatePlayerCharacter()
@@ -40,6 +40,6 @@ namespace PokemonCLI
     public class Region
     {
         public string Name { get; set; }
-        public List<PokemonSpecies> Pokemon { get; set; }
+        public List<Pokemon> Pokemon { get; set; }
     }
 }
