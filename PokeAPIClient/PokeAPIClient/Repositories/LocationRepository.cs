@@ -32,6 +32,18 @@ namespace PokeAPIClient
             dexCount = response.Data.Results.Count;
             return dexCount;
         }
+        public List<string> GetPokedexNames()
+        {
+            List<string> pokedexNames = new List<string>();
+            int dexCount = GetPokedexCount();
+            var request = new RestRequest("pokedex?limit={limit}", Method.GET);
+            request.AddUrlSegment("limit", string.Format("{0}", dexCount));
+            IRestResponse<PokedexIndexResponse> response = Client.Execute<PokedexIndexResponse>(request);
+            pokedexNames = response.Data.Results
+                .Select( r => r.Name )
+                .ToList();
+            return pokedexNames;
+        }
         public List<(string name, string description)> GetPokedexNamesAndDescriptions()
         {
             List<(string name, string description)> output = new List<(string name, string description)>();
