@@ -16,8 +16,8 @@ namespace GUIPractice
                     playerWindow,
                     npcWindow
                     }, 0);
-            playerWindow.Print("See that guy over there? We all call him 'Dumbass'");
-            npcWindow.Print("Hello, there! My name is Chris, but most people call me 'Hey dumbass!!'");
+            playerWindow.Print("It's you I like, It's not the things you wear, It's not the way you do your hair But it's you I like The way you are right now, The way down deep inside you Not the things that hide you, Not your toys They're just beside you.");
+            npcWindow.Print("But it's you I like Every part of you.  Your skin, your eyes, your feelings Whether old or new.  I hope that you'll remember Even when you're feeling blue That it's you I like, It's you yourself It's you.  It's you I like.");
             //Console.WriteLine($"The original buffer size is {GUI.OrigBufferWidth} x {GUI.OrigBufferHeight}");
             //Console.WriteLine($"playerWindow starts at {playerWindow.BufferLeft}, and npcWindow starts at {npcWindow.BufferLeft}");
             //Console.WriteLine($"Row 1 has {GUI.Rows[0].Windows.Count} windows");
@@ -78,7 +78,7 @@ namespace GUIPractice
             Console.Clear();
         }
     }
-    public class Row
+    public class Row : IRow
     {
         public int RowTop { get; set; }
         public List<IWindow> Windows { get; set; }
@@ -99,12 +99,14 @@ namespace GUIPractice
         public void DistributeWindows()
         {
             int i = 0;
+            BufSettings newBuffer = new BufSettings();
             foreach ( IWindow window in Windows )
             {
-                window.BufferWidth = GUI.OrigBufferWidth / this.Windows.Count;
-                window.BufferHeight = GUI.OrigBufferHeight / GUI.Rows.Count;
-                window.BufferTop = this.RowTop;
-                window.BufferLeft = (GUI.OrigBufferWidth / Windows.Count) * i;
+                newBuffer.Width = GUI.OrigBufferWidth / this.Windows.Count;
+                newBuffer.Height = GUI.OrigBufferHeight / GUI.Rows.Count;
+                newBuffer.Top = this.RowTop;
+                newBuffer.Left = (GUI.OrigBufferWidth / Windows.Count) * i;
+                window.Redraw(newBuffer);
                 Console.WriteLine($"Window {i}: Cursor is at {window.BufferLeft} x {window.BufferTop}... Window size is {window.BufferWidth} x {window.BufferHeight}");
                 i++;
             }
@@ -135,6 +137,13 @@ namespace GUIPractice
             Console.BufferWidth = this.BufferWidth;
             Console.BufferHeight = this.BufferHeight;
         }
+        public void Redraw(BufSettings dim)
+        {
+            this.BufferWidth = dim.Width;
+            this.BufferHeight = dim.Height;
+            this.BufferTop = dim.Top;
+            this.BufferLeft = dim.Left;
+        }
         public void Close()
         {
             GUIContext.CloseWindow(this);
@@ -160,6 +169,13 @@ namespace GUIPractice
             }
         }
     }
+    public class BufSettings
+    {
+        public int Width { get; set; }
+        public int Height { get; set; }
+        public int Top { get; set; }
+        public int Left { get; set; }
+    }
     public interface IWindow
     {
         int BufferWidth { get; set; }
@@ -168,6 +184,7 @@ namespace GUIPractice
         int BufferLeft { get; set; }
         GUI GUIContext { get; set; }
         void Activate();
+        void Redraw(BufSettings dim);
         void Close();
         void Print(string message);
     }
