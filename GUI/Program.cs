@@ -29,6 +29,9 @@ namespace GUIPractice
     {
         public static int OrigBufferWidth { get; set; }
         public static int OrigBufferHeight { get; set; }
+        public static int GutterSize { get; set; } = 2;
+        public static int TotalRowGutterSize => GUI.GutterSize * ( Rows.Count + 1 );
+        public static int RowHeight => ( GUI.OrigBufferHeight - GUI.TotalRowGutterSize ) * GUI.Rows.Count;
         public static List<Row> Rows { get; set; }
         public GUI()
         {
@@ -70,7 +73,7 @@ namespace GUIPractice
             int i = 0;
             foreach (Row row in Rows)
             {
-                row.RowTop = (OrigBufferHeight / Rows.Count) * i;
+                row.RowTop = ( GUI.RowHeight * i ) + GUI.GutterSize;
                 row.DistributeWindows();
                 Console.WriteLine($"Row {i} distributed!");
                 i++;
@@ -81,11 +84,9 @@ namespace GUIPractice
     public class Row : IRow
     {
         public int RowTop { get; set; }
-        public List<IWindow> Windows { get; set; }
-        public Row()
-        {
-            Windows = new List<IWindow>();
-        }
+        public int TotalWindowGutterSize => GUI.GutterSize * ( this.Windows.Count + 1 );
+        public int WindowWidth => (GUI.OrigBufferWidth - this.TotalWindowGutterSize) / this.Windows.Count;
+        public List<IWindow> Windows { get; set; } = new List<IWindow>();
         public void OpenWindow(IWindow window)
         {
             Windows.Add(window);
@@ -102,10 +103,10 @@ namespace GUIPractice
             BufSettings newBuffer = new BufSettings();
             foreach ( IWindow window in Windows )
             {
-                newBuffer.Width = GUI.OrigBufferWidth / this.Windows.Count;
-                newBuffer.Height = GUI.OrigBufferHeight / GUI.Rows.Count;
+                newBuffer.Width = this.WindowWidth;
+                newBuffer.Height = GUI.RowHeight;
                 newBuffer.Top = this.RowTop;
-                newBuffer.Left = (GUI.OrigBufferWidth / Windows.Count) * i;
+                newBuffer.Left = ( this.WindowWidth * i ) + ( GUI.GutterSize * i ) + GUI.GutterSize;
                 window.Redraw(newBuffer);
                 Console.WriteLine($"Window {i}: Cursor is at {window.BufferLeft} x {window.BufferTop}... Window size is {window.BufferWidth} x {window.BufferHeight}");
                 i++;
