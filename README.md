@@ -9,7 +9,6 @@
 Feature | Status
 -- | --
 GetPokemon by Region Name | Complete
-Full PokeAPI Wrapper | Not started
 
 #### PokemonCLI
 Feature | Status

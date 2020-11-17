@@ -11,7 +11,8 @@ namespace GUIPractice
             gui.AddRow(1);
             IWindow playerWindow = new BasicWindow();
             IWindow npcWindow = new BasicWindow();
-            gui.OpenWindows(new List<IWindow>() {
+            gui.OpenWindows(new List<IWindow>() 
+                    {
                     playerWindow,
                     npcWindow
                     }, 0);
