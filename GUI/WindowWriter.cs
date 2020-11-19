@@ -20,7 +20,7 @@ namespace GUIPractice
                 Console.SetCursorPosition(this._position.left, this._position.top);
             }
         }
-        public bool CursorReset => this.CurrentPosition.top > this.Window.LastLine;
+        public bool CursorReset => this.CurrentPosition.top >= this.Window.LastLine;
         public WindowWriter(IWindow window)
         {
             this.Window = window;
@@ -103,7 +103,7 @@ namespace GUIPractice
         }
         public void AdvanceLine()
         {
-            if (this.CurrentPosition.top > this.Window.LastLine)
+            if (this.CursorReset == true)
             {
                 this.Reset();
             }

@@ -29,7 +29,7 @@ namespace GUIPractice
             for ( int rowIndex = 0; rowIndex < (this.Window.BufferHeight + (GUI.GutterSize * 2) - 1); rowIndex++ )
             {
                 Console.SetCursorPosition(this.BufferLeft, this.BufferTop + rowIndex);
-                if ((rowIndex < GUI.GutterSize) || (rowIndex >= (this.Window.BufferHeight + GUI.GutterSize) - 1))
+                if ((rowIndex < GUI.GutterSize) || (rowIndex > (this.Window.BufferHeight + GUI.GutterSize) - 1))
                 {
                     Console.WriteLine(fullBorder);
                     Thread.Sleep(GUI.DebugSleepTime);

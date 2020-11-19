@@ -9,7 +9,7 @@ namespace GUIPractice
         public int BufferHeight { get; set; }
         public int BufferTop { get; set; }
         public int BufferLeft { get; set; }
-        public int LastLine => this.BufferTop + this.BufferHeight -1;
+        public int LastLine => this.BufferTop + this.BufferHeight - 1;
         public (int x, int y) Address { get; set; }
         public GUI GUIContext { get; set; }
         public Border Border { get; set; } 
