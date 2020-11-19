@@ -16,13 +16,14 @@ namespace GUIPractice
                     playerWindow,
                     npcWindow
                     }, 0);
-            playerWindow.Print("It's you I like, It's not the things you wear, It's not the way you do your hair But it's you I like The way you are right now, The way down deep inside you Not the things that hide you, Not your toys They're just beside you.");
-            npcWindow.Print("But it's you I like Every part of you.  Your skin, your eyes, your feelings Whether old or new.  I hope that you'll remember Even when you're feeling blue That it's you I like, It's you yourself It's you.  It's you I like.");
+            playerWindow.Print("I'll go over the colors one more time that we use: Titanium white, Thalo green, Prussian blue, Van Dyke brown, Alizarin crimson, Sap green, Cad yellow, and Permanent red. There isn't a rule. You just practice and find out which way works best for you. Just think about these things in your mind - then bring them into your world. Work on one thing at a time. Don't get carried away - we have plenty of time.  This is unplanned it really just happens. Let that brush dance around there and play. Son of a gun. From all of us here, I want to wish you happy painting and God bless, my friends. You can create the world you want to see and be a part of. You have that power. Let's make a happy little mountain now.  They say everything looks better with odd numbers of things. But sometimes I put even numbers—just to upset the critics. A big strong tree needs big strong roots. Making all those little fluffies that live in the clouds. It's life. It's interesting. It's fun. Put light against light - you have nothing. Put dark against dark - you have nothing. It's the contrast of light and dark that each give the other one meaning. You have to make these big decisions.  Look at them little rascals. You have freedom here. The only guide is your heart. Anytime you learn something your time and energy are not wasted. You can get away with a lot. Everyone needs a friend. Friends are the most valuable things in the world. I'm gonna add just a tiny little amount of Prussian Blue.");
+            npcWindow.Print("It's you I like, It's not the things you wear, It's not the way you do your hair But it's you I like The way you are right now, The way down deep inside you Not the things that hide you, Not your toys They're just beside you.But it's you I like Every part of you.  Your skin, your eyes, your feelings Whether old or new.  I hope that you'll remember Even when you're feeling blue That it's you I like, It's you yourself It's you.  It's you I like.");
             //Console.WriteLine($"The original buffer size is {GUI.OrigBufferWidth} x {GUI.OrigBufferHeight}");
             //Console.WriteLine($"playerWindow starts at {playerWindow.BufferLeft}, and npcWindow starts at {npcWindow.BufferLeft}");
             //Console.WriteLine($"Row 1 has {GUI.Rows[0].Windows.Count} windows");
             //Console.CursorTop = 5;
             //Console.CursorLeft = 28;
+            Console.ReadLine();
         }
     }
     public class GUI
@@ -71,14 +72,13 @@ namespace GUIPractice
         public void Refresh()
         {
             int i = 0;
+            Console.Clear();
             foreach (Row row in Rows)
             {
                 row.RowTop = ( GUI.RowHeight * i ) + GUI.GutterSize;
                 row.DistributeWindows();
-                Console.WriteLine($"Row {i} distributed!");
                 i++;
             }
-            Console.Clear();
         }
     }
     public class Row : IRow
@@ -90,12 +90,10 @@ namespace GUIPractice
         public void OpenWindow(IWindow window)
         {
             Windows.Add(window);
-            this.DistributeWindows();
         }
         public void OpenWindows(List<IWindow> windows)
         {
             Windows.AddRange(windows);
-            this.DistributeWindows();
         }
         public void DistributeWindows()
         {
@@ -108,7 +106,7 @@ namespace GUIPractice
                 newBuffer.Top = this.RowTop;
                 newBuffer.Left = ( this.WindowWidth * i ) + ( GUI.GutterSize * i ) + GUI.GutterSize;
                 window.Redraw(newBuffer);
-                Console.WriteLine($"Window {i}: Cursor is at {window.BufferLeft} x {window.BufferTop}... Window size is {window.BufferWidth} x {window.BufferHeight}");
+                //Console.WriteLine($"Window {i}: Cursor is at {window.BufferLeft} x {window.BufferTop}... Window size is {window.BufferWidth} x {window.BufferHeight}");
                 i++;
             }
         }
@@ -132,6 +130,11 @@ namespace GUIPractice
         public int BufferLeft { get; set; }
         public (int x, int y) Address { get; set; }
         public GUI GUIContext { get; set; }
+        public Border Border { get; set; } 
+        public BasicWindow()
+        {
+            this.Border = new Border(this);
+        }
         public void Activate()
         {
             Console.SetCursorPosition(this.BufferTop, this.BufferLeft);
@@ -144,6 +147,8 @@ namespace GUIPractice
             this.BufferHeight = dim.Height;
             this.BufferTop = dim.Top;
             this.BufferLeft = dim.Left;
+            //Console.WriteLine("Redrawing windows...");
+            this.Border.Draw();
         }
         public void Close()
         {
@@ -168,6 +173,51 @@ namespace GUIPractice
                     i ++;
                 }
             }
+        }
+    }
+    public class Border
+    {
+        public IWindow Window { get; set; }
+        public int BufferTop { get; set; }
+        public int BufferLeft { get; set; }
+        public Border(IWindow window)
+        {
+            this.Window = window;
+        }
+        public void Refresh()
+        {
+            this.BufferTop  = this.Window.BufferTop - GUI.GutterSize;
+            this.BufferLeft = this.Window.BufferLeft - GUI.GutterSize;
+        }
+        public void Draw()
+        {
+            //Console.WriteLine("Drawing window borders");
+            this.Refresh();
+            Console.BackgroundColor = ConsoleColor.Blue;
+            //Console.WriteLine(this.Window.BufferTop);
+            Console.SetCursorPosition(this.BufferLeft, this.BufferTop);
+            string content = new string(' ', (this.Window.BufferWidth + (2 * GUI.GutterSize)));
+            for ( int rowIndex = 0; rowIndex < (this.Window.BufferWidth + (GUI.GutterSize * 2)); rowIndex++ )
+            {
+                Console.SetCursorPosition(this.BufferLeft, this.BufferTop + rowIndex);
+                if (rowIndex <= GUI.GutterSize || rowIndex >= (this.Window.BufferHeight + GUI.GutterSize) - 1)
+                {
+                    Console.WriteLine(content);
+                }
+                else
+                {
+                    for ( int colIndex = 0; colIndex < this.Window.BufferWidth + (GUI.GutterSize * 2); colIndex++ )
+                    {
+                        if ( colIndex < GUI.GutterSize || colIndex > (this.Window.BufferWidth + GUI.GutterSize) - 1 )
+                        {
+                            Console.SetCursorPosition(this.BufferLeft + colIndex, this.BufferTop + rowIndex);
+                            Console.Write(" ");
+                        }
+                    }
+                    Console.Write("\n\r");
+                }
+            }
+            Console.ResetColor();
         }
     }
     public class BufSettings
