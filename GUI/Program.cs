@@ -37,6 +37,7 @@ namespace GUIPractice
     }
     public class GUI
     {
+        public static int DebugSleepTime { get; set; } = 50;
         public static int OrigBufferWidth { get; set; }
         public static int OrigBufferHeight { get; set; }
         public static int GutterSize { get; set; } = 2;
@@ -82,7 +83,7 @@ namespace GUIPractice
             Console.Clear();
             foreach (Row row in Rows)
             {
-                row.RowTop = ( GUI.RowHeight * i ) + GUI.GutterSize;
+                row.RowTop = ( (GUI.GutterSize + GUI.RowHeight) * i ) + GUI.GutterSize;
                 row.DistributeWindows();
                 i++;
             }
@@ -211,7 +212,7 @@ namespace GUIPractice
                 if ((rowIndex <= GUI.GutterSize) || (rowIndex >= (this.Window.BufferHeight + GUI.GutterSize) - 1))
                 {
                     Console.WriteLine(fullBorder);
-                    Thread.Sleep(50);
+                    Thread.Sleep(GUI.DebugSleepTime);
 
                 }
                 else
@@ -219,7 +220,7 @@ namespace GUIPractice
                     Console.Write(side);
                     Console.SetCursorPosition(this.BufferLeft + GUI.GutterSize + this.Window.BufferWidth , this.BufferTop + rowIndex);
                     Console.Write(side);
-                    Thread.Sleep(50);
+                    Thread.Sleep(GUI.DebugSleepTime);
                 }
             }
             Console.ResetColor();
