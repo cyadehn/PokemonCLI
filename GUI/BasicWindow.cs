@@ -32,12 +32,12 @@ namespace GUIPractice
             this.BufferTop = dim.Top;
             this.BufferLeft = dim.Left;
             //Console.WriteLine("Redrawing windows...");
-            this.Writer.Reset();
+            this.Writer.ResetPosition();
             this.Border.Draw();
         }
         public void Redraw()
         {
-            this.Writer.Reset();
+            this.Writer.ResetPosition();
             this.Border.Draw();
         }
         public void Close()

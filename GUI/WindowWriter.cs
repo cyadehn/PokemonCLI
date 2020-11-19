@@ -33,7 +33,7 @@ namespace GUIPractice
         public void Write(string text)
         {
             this.Activate();
-            Thread.Sleep(1000);
+            Thread.Sleep(GUI.DebugSleepTime);
             if ( text.Length < this.Window.BufferWidth )
             {
                 Console.WriteLine(text);
@@ -105,14 +105,14 @@ namespace GUIPractice
         {
             if (this.CursorReset == true)
             {
-                this.Reset();
+                this.ResetPosition();
             }
             else
             {
                 this.CurrentPosition = (this.CurrentPosition.left, this.CurrentPosition.top + 1);
             }
         }
-        public void Reset()
+        public void ResetPosition()
         {
             this.CurrentPosition = (this.Window.BufferLeft, this.Window.BufferTop);
         }
