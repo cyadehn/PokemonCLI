@@ -22,8 +22,6 @@ namespace BasicGUI
         public void Activate()
         {
             Console.SetCursorPosition(this.BufferLeft, this.BufferTop);
-            Console.BufferWidth = this.BufferWidth;
-            Console.BufferHeight = this.BufferHeight;
         }
         public void Redraw(BufSettings dim)
         {
