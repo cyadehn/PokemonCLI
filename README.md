@@ -45,11 +45,3 @@ Feature | Status
 -- | --
 Basic Grid | Complete
 Window Console Driver (WindowWriter) | In Progress
-By-character Printing | In Progress
-Wrap New Scene Actions in GUI Class | Not Started
-Smaller OptionWindow Class | Not Started
-Move ComboBox from PokemonCLI | Not Started
-Keyboard Window Navigation | Not Started
-Bitmap to ASCII Text Image Conversion | Not Started
-Convert Rows/Windows Lists to Dictionaries (access by key names) | Not Started
-Convert to Fully Static GUI Class? | Not Started
