@@ -11,12 +11,14 @@ namespace GUIPractice
         public static int GutterSize { get; set; } = 2;
         public static int TotalRowGutterSize => GUI.GutterSize * ( Rows.Count + 1 );
         public static int RowHeight => ( GUI.OrigBufferHeight - GUI.TotalRowGutterSize ) / GUI.Rows.Count;
+        public static IUserInput UserInput { get; set; }
         public static List<Row> Rows { get; set; }
         public GUI()
         {
             GUI.OrigBufferWidth = Console.BufferWidth;
             GUI.OrigBufferHeight = Console.BufferHeight;
             Rows = new List<Row>();
+            UserInput = new UserInput();
         }
         public void AddRow(int num)
         {

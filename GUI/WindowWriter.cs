@@ -20,10 +20,12 @@ namespace GUIPractice
                 Console.SetCursorPosition(this._position.left, this._position.top);
             }
         }
+        public Typewriter Typewriter { get; set; }
         public bool CursorReset => this.CurrentPosition.top >= this.Window.LastLine;
         public WindowWriter(IWindow window)
         {
             this.Window = window;
+            this.Typewriter = new Typewriter(this);
             this.ResetPosition();
         }
         public void Activate()
@@ -128,6 +130,23 @@ namespace GUIPractice
                 this.CurrentPosition = (this.CurrentPosition.left, ( this.CurrentPosition.top + 1 ));
             }
             this.ResetPosition();
+        }
+        public void PrintDialogue(List<string> dx)
+        {
+            this.Typewriter.PrintSubtle("Press 'Enter' to continue...");
+            foreach ( string line in dx )
+            {
+                this.Typewriter.PrintChars(line);
+                this.Typewriter.Pause();
+            }
+        }
+        public void PrintToConsole(List<string> text)
+        {
+            foreach ( string line in text )
+            {
+                this.Typewriter.PrintChars(line);
+                Console.Write("\n\r");
+            }
         }
     }
 }

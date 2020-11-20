@@ -2,76 +2,12 @@ using System;
 using System.Linq;
 using System.Reflection;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace PokemonCLI
 {
     public static class Tools
     {
         public static Assembly Assembly { get; private set; } = Assembly.GetExecutingAssembly();
-        public class UserInput : IUserInput
-        {
-            public string GetUserInput()
-            {
-                Console.WriteLine();
-                return Console.ReadLine();
-            }
-            public string GetUserInput(string prompt)
-            {
-                Tools.Typewriter.PrintChars(prompt);
-                return Console.ReadLine();
-            }
-        }
-        public static class Typewriter
-        {
-            public static void PrintChars(string line)
-                {
-                    foreach (char c in line)
-                    {
-                        Console.Write(c);
-                        CharacterDelay(c);
-                    }
-                }
-            public static void Pause()
-            {
-                ConsoleKey key;
-                do {
-                    key = Console.ReadKey(true).Key;
-                    Thread.Sleep(100);
-                } while (key != ConsoleKey.Enter);
-                Console.Write("\n\r");
-            }
-            public static void PrintPause(int num)
-            {
-                for ( int i = 0; i < num; i++ )
-                {
-                    Console.Write(".");
-                    Thread.Sleep(300);
-                }
-                Console.Write("\n\r");
-            }
-            public static void PrintSubtle(string line)
-            {
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.Write(line);
-                Console.ResetColor();
-            }
-            private static void CharacterDelay(char c)
-                {
-                    if (c == '.' )
-                    {
-                        Thread.Sleep(300);
-                    }
-                    else if ( c == ',' )
-                    {
-                        Thread.Sleep(99);
-                    }
-                    else 
-                    {
-                        Thread.Sleep(15);
-                    }
-                }
-        }
         public static class GUI
         {
             public static string ComboBox(List<string> options)
@@ -161,32 +97,5 @@ namespace PokemonCLI
                 Console.SetCursorPosition(col, row);
             }
         }
-        public static void PrintDialogue(List<string> dx)
-        {
-            Typewriter.PrintSubtle("Press 'Enter' to continue...");
-            foreach ( string line in dx )
-            {
-                Typewriter.PrintChars(line);
-                Typewriter.Pause();
-            }
-        }
-        public static void PrintToConsole(List<string> text)
-        {
-            foreach ( string line in text )
-            {
-                Typewriter.PrintChars(line);
-                Console.Write("\n\r");
-            }
-        }
-        public static void PrintLoadingLine(List<string> text)
-        {
-            Console.Write("loading...");
-            Typewriter.Pause();
-        }
-    }
-    public interface IUserInput
-    {
-        string GetUserInput(string prompt);
-        string GetUserInput();
     }
 }
