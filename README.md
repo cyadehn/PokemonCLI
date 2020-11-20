@@ -30,11 +30,6 @@ This project lays the groundwork for a console-based Pokemon adventure game. The
 *** *Create an additional class which inherits one or more properties from its parent*
 ### Completed / Planned Features
 
-#### PokeAPIClient
-Feature | Status
--- | --
-GetPokemon by Region Name | Complete
-
 #### PokemonCLI
 Feature | Status
 -- | --
@@ -43,6 +38,19 @@ PC Pokemon storage/display | Not started
 Battle system | Not started
 Map exploration | Not started
 Item discovery/battle use | Not started
+
+#### PokeAPIClient
+Feature | Status
+-- | --
+GetPokemon by Region Name | Complete
+GetBattleData by Player.Pokemon lists | Not Started
+
+#### BasicGUI
+Feature | Status
+-- | --
+Basic Grid | Complete
+Window Console Driver (WindowWriter) | In Progress
+By-character Printing | In Progress
 
 
 ### Special Instructions
