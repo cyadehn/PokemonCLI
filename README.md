@@ -1,4 +1,4 @@
-# Pokemon CLI & PokeAPIClient
+# Pokemon CLI Game Engine (incl. demo game loop)
 ## .NET Command-line Pokemon Adventure / PokeAPI.co REST Client
 ### Requirements
 * .NET SDK v3.1 [(link)](https://dotnet.microsoft.com/download/dotnet-core/3.1)
