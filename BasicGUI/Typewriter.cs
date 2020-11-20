@@ -28,15 +28,6 @@ namespace BasicGUI
             } while (key != ConsoleKey.Enter);
             this.Writer.Write("\n\r");
         }
-        public void PrintPause(int num)
-        {
-            for ( int i = 0; i < num; i++ )
-            {
-                Console.Write(".");
-                Thread.Sleep(300);
-            }
-            this.Writer.Write("\n\r");
-        }
         public void PrintSubtle(string line)
         {
             Console.ForegroundColor = ConsoleColor.DarkGray;

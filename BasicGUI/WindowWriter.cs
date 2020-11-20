@@ -80,6 +80,16 @@ namespace BasicGUI
         {
             this.Typewriter.PrintChars(text);
         }
+        public void PrintPause(int num)
+        {
+            this.Activate();
+            for ( int i = 0; i < num; i++ )
+            {
+                Console.Write(".");
+                Thread.Sleep(300);
+            }
+            Console.Write("\n\r");
+        }
         public IEnumerable<string> Split(string str, int maxLength)
         {
             if (String.IsNullOrEmpty(str) || maxLength < 1)

@@ -6,7 +6,7 @@ namespace PokemonCLI
     {
         public void Run(IWindow window)
         {
-            window.Writer.Typewriter.PrintPause(6);
+            window.Writer.PrintPause(6);
         }
     }
 }
