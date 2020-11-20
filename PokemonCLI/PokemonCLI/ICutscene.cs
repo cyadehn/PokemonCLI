@@ -1,3 +1,4 @@
+using BasicGUI;
 using System.Collections.Generic;
 
 namespace PokemonCLI
@@ -10,11 +11,13 @@ namespace PokemonCLI
     public class Cutscene : ICutscene
     {
         public List<ISceneAction> Beats { get; set; }
+        public List<IWindow> Windows { get; set; } = new List<IWindow>();
         public void Run()
         {
+            Windows.Add(new BasicWindow());
             foreach (ISceneAction action in Beats)
             {
-                action.Run();
+                action.Run(Windows[0]);
             }
         }
     }

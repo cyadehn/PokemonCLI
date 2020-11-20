@@ -1,10 +1,12 @@
+using BasicGUI;
+
 namespace PokemonCLI
 {
     public class LoadingLine : ISceneAction
     {
-        public void Run()
+        public void Run(IWindow window)
         {
-            Tools.Typewriter.PrintPause(6);
+            window.Writer.Typewriter.PrintPause(6);
         }
     }
 }

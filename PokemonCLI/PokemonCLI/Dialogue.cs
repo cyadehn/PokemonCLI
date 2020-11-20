@@ -1,3 +1,4 @@
+using BasicGUI;
 using System.Collections.Generic;
 
 namespace PokemonCLI
@@ -9,9 +10,9 @@ namespace PokemonCLI
         {
             DialogueLines = lines;
         }
-        public void Run()
+        public void Run(IWindow window)
         {
-            Tools.PrintDialogue(DialogueLines);
+            window.PrintLines(this.DialogueLines);
         }
     }
 }

@@ -1,3 +1,4 @@
+using BasicGUI;
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -26,8 +27,9 @@ namespace PokemonCLI
             }
             Cutscene Cutscene = new Cutscene()
             {
-                Beats = actions
+                Beats = actions,
             };
+            Cutscene.Windows.Add(new BasicWindow());
             return Cutscene;
         }
         private static List<string> GetScriptLines(string resourceName)
@@ -55,6 +57,9 @@ namespace PokemonCLI
         public static void Run(string key)
         {
             Cutscene scene = _cutscenes[key]();
+            Program.GUI.CloseAll();
+            Program.GUI.OpenWindows(scene.Windows, 0);
+            Program.GUI.Refresh();
             scene.Run();
         }
     }

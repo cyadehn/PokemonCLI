@@ -1,3 +1,5 @@
+using BasicGUI;
+
 namespace PokemonCLI
 {
     public class NPC : Character

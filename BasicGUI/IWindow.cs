@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace GUIPractice
+namespace BasicGUI
 {
     public interface IWindow
     {

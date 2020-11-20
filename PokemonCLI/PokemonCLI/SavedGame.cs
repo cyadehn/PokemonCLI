@@ -1,3 +1,4 @@
+using BasicGUI;
 using PokeAPIClient;
 using System.Collections.Generic;
 
@@ -7,12 +8,15 @@ namespace PokemonCLI
     {
         private PokeAPI PokeAPI { get; set; }
         public bool IsNewPlayer { get; private set; } = false;
+        private IWindow Window { get; set; } = new BasicWindow();
         public Region Region { get; set; } = new Region();
         public List<PlayerCharacter> Players { get; set; }
         public List<NPC> NonPlayerCharacters { get; set; }
         public SavedGame(PokeAPI api)
         {
             PokeAPI = api;
+            Program.GUI.CloseAll();
+            Program.GUI.OpenWindow(this.Window, 0);
             Region = this.GetNewRegion();
             Players = new List<PlayerCharacter>();
             Players.Add(this.CreatePlayerCharacter());
@@ -26,14 +30,14 @@ namespace PokemonCLI
         {
             Region region = new Region();
             List<string> names = PokeAPI.LocationRepository.GetPokedexNames();
-            Tools.Typewriter.PrintChars("Please select your region: ");
+            this.Window.Writer.Typewriter.PrintChars("Please select your region: ");
             region.Name = Tools.GUI.ComboBox(names);
             region.Pokemon = PokeAPI.PokeRepository.GetRegionalPokemon(region.Name);
             return region;
         }
         public PlayerCharacter CreatePlayerCharacter()
         {
-            PlayerCharacter character = new PlayerCharacter(new Tools.UserInput());
+            PlayerCharacter character = new PlayerCharacter(GUI.UserInput);
             return character;
         }
     }
