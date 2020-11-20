@@ -37,7 +37,7 @@ namespace PokemonCLI
             Region region = new Region();
             List<string> names = PokeAPI.LocationRepository.GetPokedexNames();
             this.Window.Writer.ResetPosition();
-            this.Window.Writer.Typewriter.PrintChars("Please select your region: ");
+            this.Window.Writer.Typewriter.PromptChars("Please select your region: ");
             region.Name = Tools.GUI.ComboBox(Window, names);
             region.Pokemon = PokeAPI.PokeRepository.GetRegionalPokemon(region.Name);
             this.Window.Writer.AdvanceLine();

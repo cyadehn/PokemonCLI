@@ -17,9 +17,11 @@ namespace PokemonCLI
                 // print box
                 Console.BackgroundColor = ConsoleColor.DarkCyan;
                 Console.ForegroundColor = ConsoleColor.Black;
+                (int left, int top) cursor = (Console.CursorLeft, Console.CursorTop);
                 Console.Write(new string(' ', width));
                 // reset to beginning position
-                window.Writer.Activate();
+                Reset(cursor);
+                //window.Writer.Activate();
                 // on down/up arrow, increment the list of strings and print exactly in the middle using the width variable
                 // on "enter", set current list item to variable and reset color
                 int i = 0;
@@ -31,7 +33,7 @@ namespace PokemonCLI
                     if ( key == ConsoleKey.Enter )
                     {
                         Console.ResetColor();
-                        Console.Write("\n\r");
+                        window.Writer.AdvanceLine();
                         return option;
                     }
                     else if ( key == ConsoleKey.UpArrow )
@@ -47,6 +49,10 @@ namespace PokemonCLI
                         i = incrementTuple.index;
                     }
                 }
+            }
+            private static void Reset((int left, int top) originalPos)
+            {
+                Console.SetCursorPosition(originalPos.left, originalPos.top);
             }
             private static (int index, string option) DecrementOption(int i, List<string> options)
             {
@@ -85,15 +91,18 @@ namespace PokemonCLI
             }
             private static void PrintCentered(IWindow window, int width, string input)
             {
+                (int left, int top) cursor = (Console.CursorLeft, Console.CursorTop);
+                Reset(cursor);
                 int strLength = input.Length;
                 int marginSize = (width - strLength)/2;
                 string option;
                 string margin = new string(' ', marginSize);
                 option = margin + input + margin;
+                Console.SetCursorPosition(cursor.left, cursor.top);
                 Console.Write(new string(' ', width));
-                window.Writer.Activate();
+                Console.SetCursorPosition(cursor.left, cursor.top);
                 Console.Write(option);
-                window.Writer.Activate();
+                Console.SetCursorPosition(cursor.left, cursor.top);
             }
         }
     }
