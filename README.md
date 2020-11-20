@@ -15,12 +15,19 @@ dotnet run
 #### Summary
 This project lays the groundwork for a console-based Pokemon adventure game. The game will include separate game states for character creation, Pokemon trainer battles, exploring to find items and catch Pokemon (including the option to auto-battle Pokemon and gain experience faster), and item/Pokemon inventory display.
 
-The main console app 'PokemonCLI' makes use of the following class libraries (with the CodeLou C# project features they fulfill in italics):
-1. PokeAPIClient - *External 
-** Manages use of RestClient package to access [PokeAPI](https://pokeapi.co/) for Pokemon game information
-** 
 #### Included Features
-
+1. PokeAPIClient - *Accessing external API* 
+** Manages use of RestClient package to access [PokeAPI](https://pokeapi.co/) for Pokemon game information
+2. BasicGUI - *none*
+** Handles display of game text and arrangement of separate content windows
+3. PokemonCLI
+** Main game loop handles game states by passing control between a mediator class (Game) and GameState classes
+*** *Master loop console app*
+** CutsceneMap class handles reading scene/dialogue information from embedded binary resources, parsing cutscene "command" lines, and passing the commands as keys to a Dictionary of Func<T> delegates to retrieve scene actions
+*** *Create a dictionary or list, populate it with several values, retrieve at least one value, and use it in your program*
+*** *Read data from an external file, such as text, JSON, CSV, etc and use that data in your application*
+** PlayerCharacter class inherits from a base Character class to provide separate new character prompt/setup options
+*** *Create an additional class which inherits one or more properties from its parent*
 ### Completed / Planned Features
 
 #### PokeAPIClient
