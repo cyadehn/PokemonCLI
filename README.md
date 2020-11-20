@@ -52,3 +52,4 @@ Move ComboBox from PokemonCLI | Not Started
 Keyboard Window Navigation | Not Started
 Bitmap to ASCII Text Image Conversion | Not Started
 Convert Rows/Windows Lists to Dictionaries (access by key names) | Not Started
+Convert to Fully Static GUI Class? | Not Started
