@@ -76,6 +76,10 @@ namespace BasicGUI
                 Console.Write("\n\r");
             }
         }
+        public void PrintPromptToConsole(string text)
+        {
+            this.Typewriter.PromptChars(text);
+        }
         public void PrintToConsole(string text)
         {
             this.Typewriter.PrintChars(text);

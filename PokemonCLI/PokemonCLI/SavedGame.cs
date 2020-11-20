@@ -40,6 +40,7 @@ namespace PokemonCLI
             this.Window.Writer.Typewriter.PrintChars("Please select your region: ");
             region.Name = Tools.GUI.ComboBox(Window, names);
             region.Pokemon = PokeAPI.PokeRepository.GetRegionalPokemon(region.Name);
+            this.Window.Writer.AdvanceLine();
             return region;
         }
         public PlayerCharacter CreatePlayerCharacter()

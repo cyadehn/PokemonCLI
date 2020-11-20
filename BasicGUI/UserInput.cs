@@ -14,8 +14,9 @@ namespace BasicGUI
         public string GetUserInput(IWindow window, string prompt)
         {
             string output = "";
-            window.Writer.PrintToConsole(prompt);
+            window.Writer.PrintPromptToConsole(prompt);
             output = Console.ReadLine();
+            window.Writer.AdvanceLine();
             return output;
         }
     }

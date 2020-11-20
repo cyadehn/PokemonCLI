@@ -11,14 +11,22 @@ namespace BasicGUI
             Writer = writer;
         }
         public void PrintChars(string line)
+        {
+            foreach (char c in line)
             {
-                foreach (char c in line)
-                {
-                    Console.Write(c);
-                    CharacterDelay(c);
-                }
-                this.Writer.AdvanceLine();
+                Console.Write(c);
+                CharacterDelay(c);
             }
+            this.Writer.AdvanceLine();
+        }
+        public void PromptChars(string line)
+        {
+            foreach (char c in line)
+            {
+                Console.Write(c);
+                CharacterDelay(c);
+            }
+        }
         public void Pause()
         {
             ConsoleKey key;
@@ -35,22 +43,22 @@ namespace BasicGUI
             Console.ResetColor();
         }
         private void CharacterDelay(char c)
+        {
+            int sentenceEnd = 300;
+            int commaPause = 99;
+            int characterDelay = 15;
+            if (c == '.' )
             {
-                int sentenceEnd = 300;
-                int commaPause = 99;
-                int characterDelay = 15;
-                if (c == '.' )
-                {
-                    Thread.Sleep(sentenceEnd);
-                }
-                else if ( c == ',' )
-                {
-                    Thread.Sleep(commaPause);
-                }
-                else 
-                {
-                    Thread.Sleep(characterDelay);
-                }
+                Thread.Sleep(sentenceEnd);
             }
+            else if ( c == ',' )
+            {
+                Thread.Sleep(commaPause);
+            }
+            else 
+            {
+                Thread.Sleep(characterDelay);
+            }
+        }
     }
 }
