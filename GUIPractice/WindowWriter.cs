@@ -59,6 +59,23 @@ namespace GUIPractice
                 this.Write(line);
             }
         }
+        public void PrintDialogue(List<string> dx)
+        {
+            this.Typewriter.PrintSubtle("Press 'Enter' to continue...");
+            foreach ( string line in dx )
+            {
+                this.Typewriter.PrintChars(line);
+                this.Typewriter.Pause();
+            }
+        }
+        public void PrintToConsole(List<string> text)
+        {
+            foreach ( string line in text )
+            {
+                this.Typewriter.PrintChars(line);
+                Console.Write("\n\r");
+            }
+        }
         public IEnumerable<string> Split(string str, int maxLength)
         {
             if (String.IsNullOrEmpty(str) || maxLength < 1)
@@ -130,23 +147,6 @@ namespace GUIPractice
                 this.CurrentPosition = (this.CurrentPosition.left, ( this.CurrentPosition.top + 1 ));
             }
             this.ResetPosition();
-        }
-        public void PrintDialogue(List<string> dx)
-        {
-            this.Typewriter.PrintSubtle("Press 'Enter' to continue...");
-            foreach ( string line in dx )
-            {
-                this.Typewriter.PrintChars(line);
-                this.Typewriter.Pause();
-            }
-        }
-        public void PrintToConsole(List<string> text)
-        {
-            foreach ( string line in text )
-            {
-                this.Typewriter.PrintChars(line);
-                Console.Write("\n\r");
-            }
         }
     }
 }
