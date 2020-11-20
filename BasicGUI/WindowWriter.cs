@@ -73,7 +73,6 @@ namespace BasicGUI
             foreach ( string line in text )
             {
                 this.Typewriter.PrintChars(line);
-                Console.Write("\n\r");
             }
         }
         public void PrintPromptToConsole(string text)
@@ -92,7 +91,7 @@ namespace BasicGUI
                 Console.Write(".");
                 Thread.Sleep(300);
             }
-            Console.Write("\n\r");
+            this.AdvanceLine();
         }
         public IEnumerable<string> Split(string str, int maxLength)
         {
