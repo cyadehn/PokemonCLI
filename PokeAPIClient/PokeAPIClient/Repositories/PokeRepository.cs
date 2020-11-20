@@ -25,11 +25,6 @@ namespace PokeAPIClient
                 pokemon.Add(GetPokemon(entry.PokemonSpecies.Name));
                 i ++;
             }
-            Console.WriteLine("Pokemon loaded:");
-            foreach ( Pokemon mon in pokemon )
-            {
-                Console.WriteLine(mon.Name);
-            }
             return pokemon;
         }
         public Pokemon GetPokemon(string name)
