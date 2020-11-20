@@ -76,6 +76,10 @@ namespace BasicGUI
                 Console.Write("\n\r");
             }
         }
+        public void PrintToConsole(string text)
+        {
+            this.Typewriter.PrintChars(text);
+        }
         public IEnumerable<string> Split(string str, int maxLength)
         {
             if (String.IsNullOrEmpty(str) || maxLength < 1)

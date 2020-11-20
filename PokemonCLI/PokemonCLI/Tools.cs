@@ -1,3 +1,4 @@
+using BasicGUI;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -10,24 +11,22 @@ namespace PokemonCLI
         public static Assembly Assembly { get; private set; } = Assembly.GetExecutingAssembly();
         public static class GUI
         {
-            public static string ComboBox(List<string> options)
+            public static string ComboBox(IWindow window, List<string> options)
             {
                 int width = GetLongestStringLength(options);
-                int origRow = Console.CursorTop;
-                int origCol = Console.CursorLeft;
                 // print box
                 Console.BackgroundColor = ConsoleColor.DarkCyan;
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.Write(new string(' ', width));
                 // reset to beginning position
-                Console.SetCursorPosition(origCol, origRow);
+                window.Writer.Activate();
                 // on down/up arrow, increment the list of strings and print exactly in the middle using the width variable
                 // on "enter", set current list item to variable and reset color
                 int i = 0;
                 string option = options.ElementAt(i);
                 while (true)
                 {
-                    PrintCentered(origCol, origRow, width, option);
+                    PrintCentered(window, width, option);
                     ConsoleKey key = Console.ReadKey().Key;
                     if ( key == ConsoleKey.Enter )
                     {
@@ -84,7 +83,7 @@ namespace PokemonCLI
                 output = orderedList.LastOrDefault().Length;
                 return output;
             }
-            private static void PrintCentered(int col, int row, int width, string input)
+            private static void PrintCentered(IWindow window, int width, string input)
             {
                 int strLength = input.Length;
                 int marginSize = (width - strLength)/2;
@@ -92,9 +91,9 @@ namespace PokemonCLI
                 string margin = new string(' ', marginSize);
                 option = margin + input + margin;
                 Console.Write(new string(' ', width));
-                Console.SetCursorPosition(col, row);
+                window.Writer.Activate();
                 Console.Write(option);
-                Console.SetCursorPosition(col, row);
+                window.Writer.Activate();
             }
         }
     }

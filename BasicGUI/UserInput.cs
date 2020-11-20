@@ -6,13 +6,17 @@ namespace BasicGUI
     {
         public string GetUserInput(IWindow window)
         {
-            Console.WriteLine("Please type your selection: ");
-            return Console.ReadLine();
+            string output = "";
+            window.Writer.PrintToConsole("Please type your selection: ");
+            output = Console.ReadLine();
+            return output;
         }
         public string GetUserInput(IWindow window, string prompt)
         {
-            window.Writer.Typewriter.PrintChars(prompt);
-            return Console.ReadLine();
+            string output = "";
+            window.Writer.PrintToConsole(prompt);
+            output = Console.ReadLine();
+            return output;
         }
     }
     public interface IUserInput

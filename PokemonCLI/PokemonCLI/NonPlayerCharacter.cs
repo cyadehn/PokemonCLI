@@ -4,7 +4,7 @@ namespace PokemonCLI
 {
     public class NPC : Character
     {
-        public NPC(IUserInput userInput) : base(userInput)
+        public NPC(IWindow window, IUserInput userInput) : base(window, userInput)
         {
 
         }

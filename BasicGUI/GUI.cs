@@ -17,8 +17,8 @@ namespace BasicGUI
         {
             GUI.OrigBufferWidth = Console.BufferWidth;
             GUI.OrigBufferHeight = Console.BufferHeight;
-            Rows = new List<Row>();
-            UserInput = new UserInput();
+            GUI.Rows = new List<Row>();
+            GUI.UserInput = new UserInput();
         }
         public void AddRow(int num)
         {
