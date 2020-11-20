@@ -5,7 +5,7 @@ namespace BasicGUI
 {
     public class GUI
     {
-        public static int DebugSleepTime { get; set; } = 50;
+        public static int DebugSleepTime { get; set; } = 0;
         public static int OrigBufferWidth { get; set; }
         public static int OrigBufferHeight { get; set; }
         public static int GutterSize { get; set; } = 2;

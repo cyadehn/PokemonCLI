@@ -12,7 +12,7 @@ namespace PokemonCLI
         }
         public void Run(IWindow window)
         {
-            window.PrintLines(this.DialogueLines);
+            window.Writer.PrintDialogue(this.DialogueLines);
         }
     }
 }

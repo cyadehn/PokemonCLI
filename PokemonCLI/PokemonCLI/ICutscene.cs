@@ -11,13 +11,16 @@ namespace PokemonCLI
     public class Cutscene : ICutscene
     {
         public List<ISceneAction> Beats { get; set; }
-        public List<IWindow> Windows { get; set; } = new List<IWindow>();
+        public IWindow Window { get; set; }
         public void Run()
         {
-            Windows.Add(new BasicWindow());
+            this.Window = new BasicWindow();
+            Program.GUI.CloseAll();
+            Program.GUI.OpenWindow(this.Window, 0);
+            Program.GUI.Refresh();
             foreach (ISceneAction action in Beats)
             {
-                action.Run(Windows[0]);
+                action.Run(this.Window);
             }
         }
     }
