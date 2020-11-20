@@ -33,7 +33,6 @@ namespace PokemonCLI
                     if ( key == ConsoleKey.Enter )
                     {
                         Console.ResetColor();
-                        window.Writer.AdvanceLine();
                         return option;
                     }
                     else if ( key == ConsoleKey.UpArrow )
