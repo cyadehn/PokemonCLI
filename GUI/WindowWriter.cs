@@ -24,7 +24,7 @@ namespace GUIPractice
         public WindowWriter(IWindow window)
         {
             this.Window = window;
-            this.CurrentPosition = (this.Window.BufferLeft, this.Window.BufferTop);
+            this.ResetPosition();
         }
         public void Activate()
         {
@@ -33,9 +33,9 @@ namespace GUIPractice
         public void Write(string text)
         {
             this.Activate();
-            Thread.Sleep(GUI.DebugSleepTime);
-            if ( text.Length < this.Window.BufferWidth )
+            if ( text.Length <= this.Window.BufferWidth )
             {
+                Thread.Sleep(GUI.DebugSleepTime);
                 Console.WriteLine(text);
                 this.AdvanceLine();
             }
@@ -44,6 +44,7 @@ namespace GUIPractice
                 IEnumerable<string> messageLines = this.WordSplit(text, this.Window.BufferWidth);
                 foreach ( string messageLine in messageLines )
                 {
+                    Thread.Sleep(GUI.DebugSleepTime);
                     Console.WriteLine(messageLine);
                     this.AdvanceLine();
                 }
@@ -105,7 +106,7 @@ namespace GUIPractice
         {
             if (this.CursorReset == true)
             {
-                this.ResetPosition();
+                this.Clear();
             }
             else
             {
@@ -115,6 +116,18 @@ namespace GUIPractice
         public void ResetPosition()
         {
             this.CurrentPosition = (this.Window.BufferLeft, this.Window.BufferTop);
+        }
+        public void Clear()
+        {
+            this.ResetPosition();
+            string blankLine = new string(' ', this.Window.BufferWidth);
+            for ( int i = 0; i < this.Window.BufferHeight; i++ )
+            {
+                Console.Write(blankLine);
+                Thread.Sleep(GUI.DebugSleepTime);
+                this.CurrentPosition = (this.CurrentPosition.left, ( this.CurrentPosition.top + 1 ));
+            }
+            this.ResetPosition();
         }
     }
 }

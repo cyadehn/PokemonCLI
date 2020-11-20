@@ -21,7 +21,7 @@ namespace GUIPractice
         {
             //Console.WriteLine("Drawing window borders");
             this.Refresh();
-            Console.BackgroundColor = ConsoleColor.Blue;
+            Console.BackgroundColor = ConsoleColor.DarkCyan;
             //Console.WriteLine(this.Window.BufferTop);
             Console.SetCursorPosition(this.BufferLeft, this.BufferTop);
             string fullBorder = new string(' ', (this.Window.BufferWidth + (2 * GUI.GutterSize)));
