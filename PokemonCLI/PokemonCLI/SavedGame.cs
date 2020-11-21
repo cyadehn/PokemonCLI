@@ -21,7 +21,7 @@ namespace PokemonCLI
         {
             Program.GUI.CloseAll();
             this.Window = new BasicWindow();
-            Program.GUI.OpenWindow(this.Window, 0);
+            Program.GUI.AddRow(this.Window);
             Program.GUI.Refresh();
             Region = this.GetNewRegion();
             Players = new List<PlayerCharacter>();

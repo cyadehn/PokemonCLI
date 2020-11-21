@@ -16,7 +16,7 @@ namespace PokemonCLI
         {
             this.Window = new BasicWindow();
             Program.GUI.CloseAll();
-            Program.GUI.OpenWindow(this.Window, 0);
+            Program.GUI.AddRow(this.Window);
             Program.GUI.Refresh();
             foreach (ISceneAction action in Beats)
             {

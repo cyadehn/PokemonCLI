@@ -1,11 +1,12 @@
 using System;
+using System.Reflection;
 using System.Collections.Generic;
 
 namespace BasicGUI
 {
     public class GUI
     {
-        public static int DebugSleepTime { get; set; } = 0;
+        public static int DebugSleepTime { get; set; } = 50;
         public static int OrigBufferWidth { get; set; }
         public static int OrigBufferHeight { get; set; }
         public static int GutterSize { get; set; } = 2;
@@ -13,6 +14,7 @@ namespace BasicGUI
         public static int RowHeight => ( GUI.OrigBufferHeight - GUI.TotalRowGutterSize ) / GUI.Rows.Count;
         public static IUserInput UserInput { get; set; }
         public static List<Row> Rows { get; set; }
+        public bool TitleSet { get; set; }
         public GUI()
         {
             GUI.OrigBufferWidth = Console.BufferWidth;
@@ -20,20 +22,23 @@ namespace BasicGUI
             GUI.Rows = new List<Row>();
             GUI.UserInput = new UserInput();
         }
-        public void AddRow(int num)
+        public void SetTitle(Assembly assembly, string resourceName)
         {
-            for ( int i = 0; i < num; i ++ )
-            {
-                Rows.Add(new Row());
-            }
+            IWindow title = new TitleWindow(assembly, resourceName);
+            this.AddRow(title);
+            this.TitleSet = true;
         }
-        public void OpenWindow(IWindow window, int rowIndex)
+        public void AddRow(List<IWindow> windows)
         {
-            Rows[rowIndex].OpenWindow(window);
+            Row row = new Row();
+            row.OpenWindows(windows);
+            GUI.Rows.Add(row);
         }
-        public void OpenWindows(List<IWindow> windows, int rowIndex)
+        public void AddRow(IWindow window)
         {
-            Rows[rowIndex].OpenWindows(windows);
+            Row row = new Row();
+            row.OpenWindow(window);
+            GUI.Rows.Add(row);
         }
         public void CloseWindow(IWindow window)
         {
@@ -49,8 +54,17 @@ namespace BasicGUI
         }
         public void CloseAll()
         {
-            GUI.Rows = new List<Row>();
-            this.AddRow(1);
+            if (this.TitleSet == false)
+            {
+                GUI.Rows = new List<Row>();
+            }
+            else
+            {
+                for ( int i = 1; i < GUI.Rows.Count; i++ )
+                {
+                    GUI.Rows.RemoveAt(i);
+                }
+            }
         }
         public void Refresh()
         {

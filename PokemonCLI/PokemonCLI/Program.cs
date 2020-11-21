@@ -11,11 +11,13 @@ namespace PokemonCLI
         {
             SavedGame loadedData = new SavedGame(PokeAPI);
             Game game = new Game(PokeAPI, loadedData);
-            GUI.AddRow(1);
-            IWindow start = new BasicWindow();
-            GUI.OpenWindow(start, 0);
+            GUI.CloseAll();
+            GUI.SetTitle(Tools.Assembly, "PokemonCLI.cutscene_scripts.title.txt");
             GUI.Refresh();
-            start.Print("Game is starting!");
+            //IWindow startWindow = new BasicWindow();
+            //GUI.AddRow(startWindow);
+            //GUI.Refresh();
+            //startWindow.Print("Game is starting!");
             game.Start();
         }
     }
