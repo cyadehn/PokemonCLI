@@ -7,25 +7,6 @@ namespace ASCIImg
 {
     public static partial class ASCIIConverter
     {
-        public ASCIIImage GetImage(MemoryStream stream)
-        {
-            ASCIImage image;
-
-            return image;
-        }
-        public ASCIImage GetImage(string filePath)
-        {
-            ASCIImage image;
-
-            return image;
-        }
-        public ASCIImage GetImage(Uri url)
-        {
-            ASCIImage image;
-
-            return image;
-        }
-
         //Pseudocode from https://www.c-sharpcorner.com/article/generating-ascii-art-from-an-image-using-C-Sharp/
         private string[] _AsciiChars = { "#", "#", "@", "%", "=", "+", "*", ":", "-", ".", "&nbsp;" };
         private void btnConvertToAscii_Click(object sender, EventArgs e)
