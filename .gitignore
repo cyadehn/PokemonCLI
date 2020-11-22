@@ -410,3 +410,6 @@ tags
  
 # Ignore vscode files
 **/.vscode
+
+# Ignore ImageSharp Sample files
+ASCIImg/Samples
