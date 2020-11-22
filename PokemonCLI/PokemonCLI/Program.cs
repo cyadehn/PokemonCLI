@@ -13,7 +13,6 @@ namespace PokemonCLI
             Game game = new Game(PokeAPI, loadedData);
             GUI.CloseAll();
             GUI.SetTitle(Tools.Assembly, "PokemonCLI.cutscene_scripts.title.txt");
-            GUI.Refresh();
             //IWindow startWindow = new BasicWindow();
             //GUI.AddRow(startWindow);
             //GUI.Refresh();
