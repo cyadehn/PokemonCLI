@@ -1,10 +1,12 @@
+using System.IO;
+
 namespace ASCIImg
 {
     public static partial class ASCIIConverter
     {
-        public ASCIIImage GetImage(MemoryStream stream)
+        public static ASCIImage GetImage(MemoryStream stream)
         {
-            ASCIImage image;
+            ASCIImage image = new ASCIImage();
 
             return image;
         }

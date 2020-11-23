@@ -1,10 +1,12 @@
+using System;
+
 namespace ASCIImg
 {
     public static partial class ASCIIConverter
     {
-        public ASCIImage GetImage(Uri url)
+        public static ASCIImage GetImage(Uri url)
         {
-            ASCIImage image;
+            ASCIImage image = new ASCIImage();
 
             return image;
         }
