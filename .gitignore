@@ -412,4 +412,4 @@ tags
 **/.vscode
 
 # Ignore ImageSharp Sample files
-ASCIImg/Samples
+ImageSharpSamples
