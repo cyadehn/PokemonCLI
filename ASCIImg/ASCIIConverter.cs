@@ -12,9 +12,11 @@ namespace ASCIImg
     public static partial class ASCIIConverter
     {
         //Pseudocode from https://www.c-sharpcorner.com/article/generating-ascii-art-from-an-image-using-C-Sharp/
-        private static string[] _AsciiChars = { " ", ".", "-", ":", "*", "+", "=", "%", "@", "#", "#" };
+        private static string[] _AsciiChars = { "#", "@", "$", "&", "%", "=","+", "*", ":", "-", ".", " " };
+        public static string[] _fullSpectrum = { "$", "@", "B", "%", "8", "&", "W", "M", "#", "*", "o", "a", "h", "k", "b", "d", "p", "q", "w", "m", "Z", "O", "0", "Q", "L", "C", "J", "U", "Y", "X", "z", "c", "v", "u", "n", "x", "r", "j", "f", "t", "/", @"\", "|", "(", ")", "1", "{", "}", "[", "]", "?", "-", "_", "+", "~", "<", ">", "i", "!", "l", "I", ";", ":", ",", @"\", "”", "^", @"\", "`", @"\", @"’", ".", " "};
+        public static string[] _medSpectrum = { "#", "$", "@", "%", "8", "&", "*", "|", "?", "-", "_", "+", "~", "!", ";", ":", ",", "”", "^", "`", @"’", ".", " "};
         private static string CallingDirectory => new System.Uri(Assembly.GetCallingAssembly().Location).AbsolutePath.Split("/bin")[0];
-        private static string OutputPath = Path.Combine(ASCIIConverter.CallingDirectory,"output/output.txt");
+        private static string OutputPath = Path.Combine(ASCIIConverter.CallingDirectory,"output/medOutput.txt");
         private static string txtPath  => Path.Combine(ASCIIConverter.CallingDirectory,"images/4.png");
         private static List<string> _Content = new List<string>() { "eenie", "meenie", "miney", "moe"  };
         public static void Convert()
@@ -65,8 +67,8 @@ namespace ASCIImg
                     //Use the toggle flag to minimize height-wise stretch
                     if (!toggle)
                     {
-                        int index = (grayColor.R * 11) / 255;
-                        sb.Append(_AsciiChars[index]);
+                        int index = (grayColor.R * (_medSpectrum.Length - 1)) / 255;
+                        sb.Append(_medSpectrum[index]);
                     }
                 }
                 if (!toggle)
