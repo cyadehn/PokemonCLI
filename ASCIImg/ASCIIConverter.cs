@@ -1,7 +1,8 @@
 ﻿using System;
-//using System.IO;
+using System.IO;
 using System.Text;
 using System.Drawing;
+using System.Reflection;
 using System.Collections.Generic;
 //using RestSharp;
 //using SixLabors.ImageSharp;
@@ -11,22 +12,26 @@ namespace ASCIImg
     public static partial class ASCIIConverter
     {
         //Pseudocode from https://www.c-sharpcorner.com/article/generating-ascii-art-from-an-image-using-C-Sharp/
-        private static string[] _AsciiChars = { "#", "#", "@", "%", "=", "+", "*", ":", "-", ".", "&nbsp;" };
-        private static string txtPath { get; set; } = "images/132.png";
-        private static List<string> _Content;
-        private static void Convert()
+        private static string[] _AsciiChars = { " ", ".", "-", ":", "*", "+", "=", "%", "@", "#", "#" };
+        private static string CallingDirectory => new System.Uri(Assembly.GetCallingAssembly().Location).AbsolutePath.Split("/bin")[0];
+        private static string OutputPath = Path.Combine(ASCIIConverter.CallingDirectory,"output/output.txt");
+        private static string txtPath  => Path.Combine(ASCIIConverter.CallingDirectory,"images/4.png");
+        private static List<string> _Content = new List<string>() { "eenie", "meenie", "miney", "moe"  };
+        public static void Convert()
         {
             //Load the Image from the specified path
+            Console.WriteLine(txtPath);
             Bitmap image = new Bitmap(txtPath, true);           
             //
             //Resize the image...
             //I've used a trackBar to emulate Zoom In / Zoom Out feature
             //This value sets the WIDTH, number of characters, of the text image
-            image = GetReSizedImage(image,50);           
+            image = GetReSizedImage(image,100);           
             //
             //Convert the resized image into ASCII
             _Content = ConvertToAscii(image);
             //
+            ASCIIConverter.WriteContentToFile();
         } 
         private static Bitmap GetReSizedImage(Bitmap inputBitmap, int asciiWidth )
         {           
@@ -60,7 +65,7 @@ namespace ASCIImg
                     //Use the toggle flag to minimize height-wise stretch
                     if (!toggle)
                     {
-                        int index = (grayColor.R * 10) / 255;
+                        int index = (grayColor.R * 11) / 255;
                         sb.Append(_AsciiChars[index]);
                     }
                 }
@@ -77,20 +82,27 @@ namespace ASCIImg
             }
             return lines;
         }
-        //private static void SaveToFile()
-        //{
-            //if (saveFileDialog1.FilterIndex == 1)
-            //{
-                //_Content = _Content.Replace("&nbsp;", " ").Replace("<BR>","\n");
-            //}
-            //else
-            //{
-                //_Content = "<pre>" + _Content + "</pre>";
-            //}
-            //StreamWriter sw = new StreamWriter(saveFileDialog1.FileName);
-            //sw.Write(_Content);
-            //sw.Flush();
-            //sw.Close();
-        //}
+        private static void WriteTextToFile()
+        {
+        }
+        private static void SaveHTMLToFile()
+        {
+            List<string> html = new List<string>();
+            html.Add("<pre>");
+            foreach ( string line in _Content )
+            {
+                html.Add(line.Replace(" ", "&nbsp;") + "<BR>");
+            }
+            html.Add("</pre>");
+            ASCIIConverter.WriteContentToFile(html);
+        }
+        public static void WriteContentToFile(List<string> lines)
+        {
+            File.WriteAllLines(ASCIIConverter.OutputPath, lines);
+        }
+        public static void WriteContentToFile()
+        {
+            File.WriteAllLines(ASCIIConverter.OutputPath, _Content);
+        }
     }
 }
