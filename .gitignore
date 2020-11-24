@@ -413,3 +413,6 @@ tags
 
 # Ignore ImageSharp Sample files
 ImageSharpSamples
+
+# Ignore ASCIImg output
+*/output
