@@ -1,7 +1,7 @@
 # Pokemon CLI Game Engine (incl. demo game loop)
 > .NET Command-line Pokemon Adventure / PokeAPI.co REST Client
 ## Table of Contents
-* [Requirements](### Requirements)
+* [Requirements](#requirements)
 * [Quick Start](### Quick Start)
 * [General Info](### General Info)
 * [Screenshots](### Screenshots)
