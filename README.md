@@ -2,13 +2,13 @@
 > .NET Command-line Pokemon Adventure / PokeAPI.co REST Client
 ## Table of Contents
 * [Requirements](#requirements)
-* [Quick Start](### Quick Start)
-* [General Info](### General Info)
-* [Screenshots](### Screenshots)
-* [CodeLou Fall'20 Included Features](### Included Features)
-* [Completed Features](### Requirements)
-* [Status](### Status)
-* [Contact](### Contact)
+* [Quick Start](#quick-start)
+* [General Info](#general-info)
+* [Screenshots](#screenshots)
+* [CodeLou Fall'20 Included Features](#codelou-fall20-included-features)
+* [Completed Features](#completed-features)
+* [Status](#status)
+* [Contact](#contact)
 
 ### Requirements
 * .NET SDK v3.1 [(link)](https://dotnet.microsoft.com/download/dotnet-core/3.1)
