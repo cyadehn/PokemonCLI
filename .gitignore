@@ -416,3 +416,6 @@ ImageSharpSamples
 
 # Ignore ASCIImg output
 */output
+
+# Ignore todo
+todo.txt
