@@ -5,8 +5,8 @@
 * [Quick Start](#quick-start)
 * [General Info](#general-info)
 * [Screenshots](#screenshots)
-* [CodeLou Fall'20 Included Features](#codelou-fall20-included-features)
 * [Completed Features](#completed-features)
+* [CodeLou Fall'20 Included Features](#codelou-fall20-included-features)
 * [Status](#status)
 * [Contact](#contact)
 
@@ -26,6 +26,8 @@ dotnet run
 ### General Info
 This project lays the groundwork for a console-based Pokemon adventure game. The game will include separate game states for character creation, Pokemon trainer battles, exploring to find items and catch Pokemon (including the option to auto-battle Pokemon and gain experience faster), and item/Pokemon inventory display.
 
+### Completed Features
+
 ### CodeLou Fall'20 Included Features
 1. PokeAPIClient - Manages use of RestClient package to access [PokeAPI](https://pokeapi.co/) for Pokemon game information (*Accessing external API*)
 2. BasicGUI - Handles display of game text and arrangement of separate content windows (*none*)
@@ -35,6 +37,5 @@ This project lays the groundwork for a console-based Pokemon adventure game. The
 * PlayerCharacter class inherits from a base Character class to provide separate new character prompt/setup options (*Create an additional class which inherits one or more properties from its parent*)
 
 
-### Completed Features
 ### Status
 ### Contact
