@@ -96,6 +96,10 @@ namespace ASCIImg
             }
             return lines;
         }
+        private static List<ColorChar> ConvertToColorAscii(Bitmap image)
+        {
+            throw new NotImplementedException();
+        }
         private static void WriteTextToFile()
         {
         }
@@ -117,6 +121,36 @@ namespace ASCIImg
         public static void WriteContentToFile()
         {
             File.WriteAllLines(ASCIIConverter.OutputPath, _Content);
+        }
+    }
+    public struct ColorChar : IEquatable<ColorChar>
+    {
+        public ColorChar(ConsoleColor color, Char character)
+        {
+            this.Color = color;
+            this.Character = character;
+        }
+        ConsoleColor Color;
+        Char Character;
+        public override bool Equals(Object obj)
+        {
+            if ( obj == null || ! ( this.GetType().Equals(obj.GetType()) ) )
+            {
+                return false;
+            }
+            else
+            {
+                ColorChar cc = (ColorChar) obj;
+                return ( this.Color == cc.Color ) && ( this.Character == cc.Character );
+            }
+        }
+        public bool Equals(ColorChar that)
+        {
+            return ( this.Color == that.Color ) && ( this.Character == that.Character );
+        }
+        public override int GetHashCode()
+        {
+            return this.Color.GetHashCode() ^ Character.GetHashCode();
         }
     }
 }
