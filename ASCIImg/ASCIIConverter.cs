@@ -59,16 +59,28 @@ namespace ASCIImg
                 for (int w = 0; w < image.Width; w++)
                 {
                     Color pixelColor = image.GetPixel(w, h);
+                    int red;
+                    int green;
+                    int blue;
                     //Average out the RGB components to find the Gray Color
-                    int red = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
-                    int green = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
-                    int blue = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
+                    if (pixelColor.A != 0)
+                    {
+                        red = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
+                        green = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
+                        blue = (pixelColor.R + pixelColor.G + pixelColor.B) / 3;
+                    }
+                    else
+                    {
+                        red = 255;
+                        green = 255;
+                        blue = 255;
+                    }
                     Color grayColor = Color.FromArgb(red,green,blue);
                     //Use the toggle flag to minimize height-wise stretch
                     if (!toggle)
                     {
-                        int index = (grayColor.R * (_medSpectrum.Length - 1)) / 255;
-                        sb.Append(_medSpectrum[index]);
+                        int index = (grayColor.R * (_AsciiChars.Length - 1)) / 255;
+                        sb.Append(_AsciiChars[index]);
                     }
                 }
                 if (!toggle)
