@@ -27,6 +27,11 @@ dotnet run
 This project lays the groundwork for a console-based Pokemon adventure game. The game will include separate game states for character creation, Pokemon trainer battles, exploring to find items and catch Pokemon (including the option to auto-battle Pokemon and gain experience faster), and item/Pokemon inventory display.
 
 ### Completed Features
+Cutscene engine | In progress
+PC Pokemon storage/display | Not started
+Battle system | Not started
+Map exploration | Not started
+Item discovery/battle use | Not started
 
 ### CodeLou Fall'20 Included Features
 1. PokeAPIClient - Manages use of RestClient package to access [PokeAPI](https://pokeapi.co/) for Pokemon game information (*Accessing external API*)
