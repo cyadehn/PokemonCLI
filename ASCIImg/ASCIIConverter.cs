@@ -17,7 +17,7 @@ namespace ASCIImg
         public static string[] _medSpectrum = { "#", "$", "@", "%", "8", "&", "*", "|", "?", "-", "_", "+", "~", "!", ";", ":", ",", "”", "^", "`", @"’", ".", " "};
         private static string CallingDirectory => new System.Uri(Assembly.GetCallingAssembly().Location).AbsolutePath.Split("/bin")[0];
         private static string OutputPath = Path.Combine(ASCIIConverter.CallingDirectory,"output/medOutput.txt");
-        private static string txtPath  => Path.Combine(ASCIIConverter.CallingDirectory,"images/4.png");
+        private static string txtPath  => Path.Combine(ASCIIConverter.CallingDirectory,"images/132.png");
         private static List<string> _Content = new List<string>() { "eenie", "meenie", "miney", "moe"  };
         public static void Convert()
         {
@@ -28,7 +28,7 @@ namespace ASCIImg
             //Resize the image...
             //I've used a trackBar to emulate Zoom In / Zoom Out feature
             //This value sets the WIDTH, number of characters, of the text image
-            image = GetReSizedImage(image,100);           
+            image = GetReSizedImage(image,150);
             //
             //Convert the resized image into ASCII
             _Content = ConvertToAscii(image);
