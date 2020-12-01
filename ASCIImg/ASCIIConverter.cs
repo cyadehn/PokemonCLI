@@ -49,6 +49,11 @@ namespace ASCIImg
             g.Dispose();
             return result;
         }
+        private static Bitmap CropImage(Bitmap inputBitmap, Rectangle crop)
+        {
+            Bitmap bmpCrop = inputBitmap.Clone(crop, inputBitmap.PixelFormat);
+            return bmpCrop;
+        }
         private static List<string> ConvertToAscii(Bitmap image)
         {
             Boolean toggle = false;
