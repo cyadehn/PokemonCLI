@@ -410,3 +410,12 @@ tags
  
 # Ignore vscode files
 **/.vscode
+
+# Ignore ImageSharp Sample files
+ImageSharpSamples
+
+# Ignore ASCIImg output
+*/output
+
+# Ignore todo
+todo.txt
