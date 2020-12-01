@@ -1,4 +1,5 @@
 ﻿using BasicGUI;
+using ASCIImg;
 using System;
 using System.Collections.Generic;
 
@@ -7,6 +8,11 @@ namespace GUIPractice
     partial class Program
     {
         static void Main(string[] args)
+        {
+            //StartTestGUI();
+            SaveTestLines();
+        }
+        public static void StartTestGUI()
         {
             GUI gui = new GUI();
             IWindow playerWindow = new BasicWindow();
@@ -33,6 +39,14 @@ namespace GUIPractice
             //Console.CursorLeft = 28;
             Console.ReadLine();
             Console.Clear();
+<<<<<<< HEAD
+=======
+        }
+        public static void SaveTestLines()
+        {
+            ASCIIConverter.Convert();
+            ASCIIConverter.WriteContentToFile();
+>>>>>>> development
         }
     }
 }

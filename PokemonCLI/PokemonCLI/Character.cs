@@ -14,7 +14,6 @@ namespace PokemonCLI
         {
             this.Window = window;
             SetCharacterName(userInput);
-
         }
         public virtual void SetCharacterName(IUserInput userInput)
         {

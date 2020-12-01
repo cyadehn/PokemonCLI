@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BasicGUI\BasicGUI.csproj" />
+    <ProjectReference Include="..\ASCIImg\ASCIImg.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
