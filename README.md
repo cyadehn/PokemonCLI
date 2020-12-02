@@ -1,14 +1,17 @@
 # Pokemon CLI Game Engine (incl. demo game loop)
 > .NET Command-line Pokemon Adventure / PokeAPI.co REST Client
 ## Table of Contents
-* [Requirements](#requirements)
-* [Quick Start](#quick-start)
-* [General Info](#general-info)
-* [Screenshots](#screenshots)
-* [Completed Features](#completed-features)
-* [CodeLou Fall'20 Included Features](#codelou-fall20-included-features)
-* [Status](#status)
-* [Contact](#contact)
+<p align="center">
+  <a href="#requirements">Requirements</a> •
+  <a href="#quick-start">Quick Start</a> •
+  <a href="#general-info">General Info</a> •
+  <a href="#screenshots">Screenshots</a> •
+  <a href="#codelou-fall20-included-features">CodeLou Fall'20 Included Features</a> •
+  <a href="#completed-features">Completed Features</a> •
+  <a href="#credits">Credits</a> •
+  <a href="#status">Status</a> •
+  <a href="#contact">Contact</a>
+</p>
 
 ### Requirements
 * .NET SDK v3.1 [(link)](https://dotnet.microsoft.com/download/dotnet-core/3.1)
