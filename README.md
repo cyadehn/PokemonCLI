@@ -21,7 +21,7 @@
 2. Change into main PokemonCLI directory
 3. `dotnet run`
 ```
-git clone https://github.com/cyadehn/pokemon-cli.git
+git clone https://github.com/cyadehn/PokemonCLI.git
 cd pokemon-cli/PokemonCLI/PokemonCLI
 dotnet run
 ```
